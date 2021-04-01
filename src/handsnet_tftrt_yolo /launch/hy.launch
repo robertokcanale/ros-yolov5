@@ -1,0 +1,6 @@
+<launch>
+    <node name="tactile_image_publisher" pkg="handsnet_tftrt_yolo" type="tactile_image_publisher.py" output="screen" cwd="node"/>
+    <node name="hand_tftrt_recognition" pkg="handsnet_tftrt_yolo" type="hand_tftrt_recognition.py" output="screen" cwd="node"/>
+    <!--node name="hand_classification" pkg="handsnet_yolo" type="yolov5_classification.py" output="screen" cwd="node"/-->
+
+  </launch>

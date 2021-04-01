@@ -1,0 +1,8 @@
+prefix=/home/maclab/Documents/RCanale/ros-yolov5/install
+
+Name: timed_yolov5
+Description: Description of timed_yolov5
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

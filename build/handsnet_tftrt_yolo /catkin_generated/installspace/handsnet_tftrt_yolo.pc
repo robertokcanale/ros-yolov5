@@ -1,0 +1,8 @@
+prefix=/home/maclab/Documents/RCanale/ros-yolov5/install
+
+Name: handsnet_tftrt_yolo
+Description: Description of handsnet_tftrt_yolo
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

@@ -1,0 +1,3 @@
+<launch>
+    <node name="tactile_image_publisher" pkg="yolov5" type="tactile_image_publisher.py" output="screen"/>
+  </launch>
