@@ -3,6 +3,6 @@ prefix=/home/maclab/Documents/RCanale/ros-yolov5/devel
 Name: handsnet_tftrt_yolo
 Description: Description of handsnet_tftrt_yolo
 Version: 0.0.0
-Cflags: 
+Cflags: -I/home/maclab/Documents/RCanale/ros-yolov5/devel/include
 Libs: -L${prefix}/lib 
 Requires: 

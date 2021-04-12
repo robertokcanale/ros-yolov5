@@ -16,7 +16,7 @@ yolo_image = TactileImage()
 
 #IMPORTING THE MODEL
 def import_model():
-    model = tf.saved_model.load('data/HandsNet_2_trt32.h5')
+    model = tf.saved_model.load('data/tftrt')
     model.trainable = False #Freezing the Model
     #model.summary()
     return model
@@ -47,10 +47,10 @@ def hand_recognition(model, image):
     prediction_model = model.signatures['serving_default']
     signature_keys = list(model.signatures.keys())
     predictions = prediction_model(input_1=image)
-    if predictions['dense_2'].np()[0][0]>0.9:
+    if predictions['dense_2'].numpy()[0][0]>0.9:
         print("Hand")
         return 1 #recognizes hand in contact
-    elif predictions['dense_2'].np()[0][1]>0.9:
+    elif predictions['dense_2'].numpy()[0][1]>0.9:
         print("Non_Hand")
         return 0 #recognizes non_hand in contact
     else: 
@@ -60,7 +60,8 @@ def hand_recognition(model, image):
 
 #MAIN FUNCTION
 if __name__ == '__main__':
-
+    cwd = os.getcwd();
+    print(cwd)
     #GPU CHECKS
     gpus = tf.config.experimental.list_physical_devices('GPU')
     if gpus:

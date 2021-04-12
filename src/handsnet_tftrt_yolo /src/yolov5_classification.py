@@ -12,6 +12,8 @@ import torch.backends.cudnn as cudnn
 from sensor_msgs.msg import Image as TactileImage
 from PIL import Image
 from cv_bridge import CvBridge, CvBridgeError
+from handsnet_tftrt_yolo.msg import BB
+from handsnet_tftrt_yolo.msg import Image_BB
 
 from models.experimental import attempt_load
 from utils.datasets import LoadStreams, LoadImages

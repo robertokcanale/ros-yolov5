@@ -2,16 +2,15 @@
 import rospy
 import argparse
 import time
-import os
 from std_msgs.msg import Int16
 import cv2
 import torch
 import numpy as np
-from torch._C import Size
-import torch.backends.cudnn as cudnn
 from sensor_msgs.msg import Image as TactileImage
 from PIL import Image
 from cv_bridge import CvBridge, CvBridgeError
+from handsnet_yolo.msg import Image_BB
+from handsnet_yolo.msg import BB
 
 from models.experimental import attempt_load
 from utils.datasets import LoadStreams, LoadImages
@@ -49,12 +48,9 @@ def callback_image(data):
         #CLASS= Torch.tensor
     if hand_contact ==1:
         pred = model(img, augment=opt.augment)[0]
-
         # Apply NMS
         pred = non_max_suppression(pred, conf_thres, iou_thres, classes=opt.classes, 	agnostic=opt.agnostic_nms)
         t2 = time_synchronized()
-
-
         # Process detections
         for i,det in enumerate(pred):  # detections per image
             s = ''
@@ -94,18 +90,17 @@ def callback_contact(contact):
     global hand_contact
     if contact.data == 1:
         hand_contact = 1
-        print("Hand")
+        #print("Hand")
     elif contact.data == 0:
         hand_contact = 0
-        print("Non_Hand")
+        #print("Non_Hand")
     else:
-        print("Not Recognized")
+        #print("Not Recognized")
         hand_contact = 99
     
 
+#MAIN
 if __name__ == '__main__':
-    cwd = os.getcwd()
-    print(cwd)
     #INITIALISATION
     parser = argparse.ArgumentParser()
     parser.add_argument('--classes', nargs='+', type=int, help='filter by class: --class 0, or --class 0 2 3')
@@ -118,7 +113,7 @@ if __name__ == '__main__':
     view_img= True
     conf_thres= 0.5
     iou_thres=0.5
-    device = '0'
+    device = '0' #or CPU if needed
     #GPU
     set_logging()
     device = select_device(device)
@@ -127,14 +122,17 @@ if __name__ == '__main__':
     model = attempt_load(weights, map_location=device)
     # Get names and colors
     names = model.module.names if hasattr(model, 'module') else model.names
-    #colors = [[random.randint(0, 255) for _ in range(3)] for _ in names]
 
+    #NODE INITIALIZATION
     rospy.init_node('hand_classification')
     pub = rospy.Publisher('BundingBox', Int16, queue_size=10)
     rospy.Subscriber('tactile_image_yolo', TactileImage, callback_image) #this is a rosmsmg.msg Image
     rospy.Subscriber('hand_contact', Int16, callback_contact) #this is a rosmsmg.msg Image
 
+    #RATE
     rate = rospy.Rate(1) # 1hz
+
+    #LOOP
     with torch.no_grad():    
         while not rospy.is_shutdown():
             pub.publish(1)

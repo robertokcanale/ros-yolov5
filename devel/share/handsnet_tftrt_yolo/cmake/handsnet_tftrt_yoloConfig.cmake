@@ -91,9 +91,9 @@ endif()
 # flag project as catkin-based to distinguish if a find_package()-ed project is a catkin project
 set(handsnet_tftrt_yolo_FOUND_CATKIN_PROJECT TRUE)
 
-if(NOT " " STREQUAL " ")
+if(NOT "/home/maclab/Documents/RCanale/ros-yolov5/devel/include " STREQUAL " ")
   set(handsnet_tftrt_yolo_INCLUDE_DIRS "")
-  set(_include_dirs "")
+  set(_include_dirs "/home/maclab/Documents/RCanale/ros-yolov5/devel/include")
   if(NOT " " STREQUAL " ")
     set(_report "Check the issue tracker '' and consider creating a ticket if the problem has not been reported yet.")
   elseif(NOT " " STREQUAL " ")
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/maclab/Documents/RCanale/ros-yolov5/devel/lib;/opt/ros/noetic/lib)
+    foreach(path /home/maclab/Documents/RCanale/ros-yolov5/devel/lib;/home/maclab/Documents/RCanale/ros-yolov5/devel/lib;/opt/ros/noetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
@@ -177,7 +177,7 @@ foreach(library ${libraries})
   endif()
 endforeach()
 
-set(handsnet_tftrt_yolo_EXPORTED_TARGETS "")
+set(handsnet_tftrt_yolo_EXPORTED_TARGETS "handsnet_tftrt_yolo_generate_messages_cpp;handsnet_tftrt_yolo_generate_messages_eus;handsnet_tftrt_yolo_generate_messages_lisp;handsnet_tftrt_yolo_generate_messages_nodejs;handsnet_tftrt_yolo_generate_messages_py")
 # create dummy targets for exported code generation targets to make life of users easier
 foreach(t ${handsnet_tftrt_yolo_EXPORTED_TARGETS})
   if(NOT TARGET ${t})
@@ -214,7 +214,7 @@ foreach(depend ${depends})
   list(APPEND handsnet_tftrt_yolo_EXPORTED_TARGETS ${${handsnet_tftrt_yolo_dep}_EXPORTED_TARGETS})
 endforeach()
 
-set(pkg_cfg_extras "")
+set(pkg_cfg_extras "handsnet_tftrt_yolo-msg-extras.cmake")
 foreach(extra ${pkg_cfg_extras})
   if(NOT IS_ABSOLUTE ${extra})
     set(extra ${handsnet_tftrt_yolo_DIR}/${extra})

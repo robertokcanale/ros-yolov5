@@ -12,6 +12,8 @@ import torch.backends.cudnn as cudnn
 from sensor_msgs.msg import Image as TactileImage
 from PIL import Image
 from cv_bridge import CvBridge, CvBridgeError
+from handsnet_tftrt_yolo.msg import BB
+from handsnet_tftrt_yolo.msg import Image_BB
 
 from models.experimental import attempt_load
 from utils.datasets import LoadStreams, LoadImages
@@ -113,7 +115,7 @@ if __name__ == '__main__':
     parser.add_argument('--augment', action='store_true', help='augmented inference')
 
     opt = parser.parse_args()
-    weights= 'src/handsnet_yolo/src/data/best_finetune3.pt' #
+    weights= 'data/best_finetune3.pt' #src/handsnet_tftrt_yolo/src/
     imgsz = 416
     view_img= True
     conf_thres= 0.5
