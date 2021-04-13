@@ -108,7 +108,6 @@ if __name__ == '__main__':
 
     #MODEL
     model = attempt_load(weights, map_location=device)
-
     # Get names and colors
     names = model.module.names if hasattr(model, 'module') else model.names
 
