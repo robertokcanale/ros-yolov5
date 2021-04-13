@@ -18,16 +18,16 @@ class BB {
   constructor(initObj={}) {
     if (initObj === null) {
       // initObj === null is a special case for deserialization where we don't initialize fields
-      this.class = null;
+      this.obj_class = null;
       this.confidence = null;
       this.coordinates = null;
     }
     else {
-      if (initObj.hasOwnProperty('class')) {
-        this.class = initObj.class
+      if (initObj.hasOwnProperty('obj_class')) {
+        this.obj_class = initObj.obj_class
       }
       else {
-        this.class = '';
+        this.obj_class = '';
       }
       if (initObj.hasOwnProperty('confidence')) {
         this.confidence = initObj.confidence
@@ -39,23 +39,19 @@ class BB {
         this.coordinates = initObj.coordinates
       }
       else {
-        this.coordinates = new Array(4).fill(0);
+        this.coordinates = [];
       }
     }
   }
 
   static serialize(obj, buffer, bufferOffset) {
     // Serializes a message object of type BB
-    // Serialize message field [class]
-    bufferOffset = _serializer.string(obj.class, buffer, bufferOffset);
+    // Serialize message field [obj_class]
+    bufferOffset = _serializer.string(obj.obj_class, buffer, bufferOffset);
     // Serialize message field [confidence]
     bufferOffset = _serializer.float32(obj.confidence, buffer, bufferOffset);
-    // Check that the constant length array field [coordinates] has the right length
-    if (obj.coordinates.length !== 4) {
-      throw new Error('Unable to serialize array field coordinates - length must be 4')
-    }
     // Serialize message field [coordinates]
-    bufferOffset = _arraySerializer.float32(obj.coordinates, buffer, bufferOffset, 4);
+    bufferOffset = _arraySerializer.float32(obj.coordinates, buffer, bufferOffset, null);
     return bufferOffset;
   }
 
@@ -63,19 +59,20 @@ class BB {
     //deserializes a message object of type BB
     let len;
     let data = new BB(null);
-    // Deserialize message field [class]
-    data.class = _deserializer.string(buffer, bufferOffset);
+    // Deserialize message field [obj_class]
+    data.obj_class = _deserializer.string(buffer, bufferOffset);
     // Deserialize message field [confidence]
     data.confidence = _deserializer.float32(buffer, bufferOffset);
     // Deserialize message field [coordinates]
-    data.coordinates = _arrayDeserializer.float32(buffer, bufferOffset, 4)
+    data.coordinates = _arrayDeserializer.float32(buffer, bufferOffset, null)
     return data;
   }
 
   static getMessageSize(object) {
     let length = 0;
-    length += _getByteLength(object.class);
-    return length + 24;
+    length += _getByteLength(object.obj_class);
+    length += 4 * object.coordinates.length;
+    return length + 12;
   }
 
   static datatype() {
@@ -85,15 +82,15 @@ class BB {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return 'e5df805725a7fa5ef20dff2b5693f3d6';
+    return 'dfc87673751af1dddbaefa01947e8324';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
-    string class
+    string obj_class
     float32 confidence
-    float32[4] coordinates
+    float32[] coordinates
     `;
   }
 
@@ -103,11 +100,11 @@ class BB {
       msg = {};
     }
     const resolved = new BB(null);
-    if (msg.class !== undefined) {
-      resolved.class = msg.class;
+    if (msg.obj_class !== undefined) {
+      resolved.obj_class = msg.obj_class;
     }
     else {
-      resolved.class = ''
+      resolved.obj_class = ''
     }
 
     if (msg.confidence !== undefined) {
@@ -121,7 +118,7 @@ class BB {
       resolved.coordinates = msg.coordinates;
     }
     else {
-      resolved.coordinates = new Array(4).fill(0)
+      resolved.coordinates = []
     }
 
     return resolved;

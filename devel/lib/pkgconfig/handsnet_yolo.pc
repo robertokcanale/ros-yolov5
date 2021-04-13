@@ -5,4 +5,4 @@ Description: Description of handsnet_yolo
 Version: 0.0.0
 Cflags: -I/home/maclab/Documents/RCanale/ros-yolov5/devel/include
 Libs: -L${prefix}/lib 
-Requires: roscpp rospy std_msgs
+Requires: message_runtime roscpp rospy std_msgs

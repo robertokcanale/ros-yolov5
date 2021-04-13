@@ -1,2 +1,2 @@
 int16 bb_number
-BB[] bb_array
+handsnet_tftrt_yolo/BB[] bb_array

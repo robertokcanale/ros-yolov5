@@ -24,28 +24,26 @@ struct BB_
   typedef BB_<ContainerAllocator> Type;
 
   BB_()
-    : class()
+    : obj_class()
     , confidence(0.0)
     , coordinates()  {
-      coordinates.assign(0.0);
-  }
+    }
   BB_(const ContainerAllocator& _alloc)
-    : class(_alloc)
+    : obj_class(_alloc)
     , confidence(0.0)
-    , coordinates()  {
+    , coordinates(_alloc)  {
   (void)_alloc;
-      coordinates.assign(0.0);
-  }
+    }
 
 
 
-   typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _class_type;
-  _class_type class;
+   typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _obj_class_type;
+  _obj_class_type obj_class;
 
    typedef float _confidence_type;
   _confidence_type confidence;
 
-   typedef boost::array<float, 4>  _coordinates_type;
+   typedef std::vector<float, typename ContainerAllocator::template rebind<float>::other >  _coordinates_type;
   _coordinates_type coordinates;
 
 
@@ -77,7 +75,7 @@ return s;
 template<typename ContainerAllocator1, typename ContainerAllocator2>
 bool operator==(const ::handsnet_tftrt_yolo::BB_<ContainerAllocator1> & lhs, const ::handsnet_tftrt_yolo::BB_<ContainerAllocator2> & rhs)
 {
-  return lhs.class == rhs.class &&
+  return lhs.obj_class == rhs.obj_class &&
     lhs.confidence == rhs.confidence &&
     lhs.coordinates == rhs.coordinates;
 }
@@ -136,12 +134,12 @@ struct MD5Sum< ::handsnet_tftrt_yolo::BB_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "e5df805725a7fa5ef20dff2b5693f3d6";
+    return "dfc87673751af1dddbaefa01947e8324";
   }
 
   static const char* value(const ::handsnet_tftrt_yolo::BB_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xe5df805725a7fa5eULL;
-  static const uint64_t static_value2 = 0xf20dff2b5693f3d6ULL;
+  static const uint64_t static_value1 = 0xdfc87673751af1ddULL;
+  static const uint64_t static_value2 = 0xdbaefa01947e8324ULL;
 };
 
 template<class ContainerAllocator>
@@ -160,9 +158,9 @@ struct Definition< ::handsnet_tftrt_yolo::BB_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "string class\n"
+    return "string obj_class\n"
 "float32 confidence\n"
-"float32[4] coordinates\n"
+"float32[] coordinates\n"
 ;
   }
 
@@ -181,7 +179,7 @@ namespace serialization
   {
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
-      stream.next(m.class);
+      stream.next(m.obj_class);
       stream.next(m.confidence);
       stream.next(m.coordinates);
     }
@@ -202,8 +200,8 @@ struct Printer< ::handsnet_tftrt_yolo::BB_<ContainerAllocator> >
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::handsnet_tftrt_yolo::BB_<ContainerAllocator>& v)
   {
-    s << indent << "class: ";
-    Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.class);
+    s << indent << "obj_class: ";
+    Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.obj_class);
     s << indent << "confidence: ";
     Printer<float>::stream(s, indent + "  ", v.confidence);
     s << indent << "coordinates[]" << std::endl;

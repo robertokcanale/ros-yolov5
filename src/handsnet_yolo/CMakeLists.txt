@@ -107,7 +107,7 @@ generate_messages(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES yolov5
-   CATKIN_DEPENDS roscpp rospy std_msgs
+   CATKIN_DEPENDS message_runtime roscpp rospy std_msgs
 #  DEPENDS system_lib
 )
 
@@ -206,7 +206,7 @@ include_directories(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
-catkin_install_python(PROGRAMS   src/yolov5_classification.py src/tactile_image_publisher.py src/hand_recognition.py src/yolov5_class_minimized.py
+catkin_install_python(PROGRAMS   src/yolov5_classification.py src/tactile_image_publisher.py src/hand_recognition.py 
 
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )

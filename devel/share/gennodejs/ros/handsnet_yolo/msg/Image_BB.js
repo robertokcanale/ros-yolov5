@@ -82,19 +82,19 @@ class Image_BB {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '14bc22618fd0092fba3e105e603ce122';
+    return 'e36224c45647457f9e206d30e8546220';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
     int16 bb_number
-    BB[] bb_array
+    handsnet_yolo/BB[] bb_array
     ================================================================================
     MSG: handsnet_yolo/BB
-    string class
+    string obj_class
     float32 confidence
-    float32[4] coordinates
+    float32[] coordinates
     `;
   }
 

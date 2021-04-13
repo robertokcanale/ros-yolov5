@@ -1,3 +1,3 @@
-string class
+string obj_class
 float32 confidence
-float32[4] coordinates
+float32[] coordinates

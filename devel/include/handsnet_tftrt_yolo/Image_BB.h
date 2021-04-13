@@ -129,12 +129,12 @@ struct MD5Sum< ::handsnet_tftrt_yolo::Image_BB_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "14bc22618fd0092fba3e105e603ce122";
+    return "e36224c45647457f9e206d30e8546220";
   }
 
   static const char* value(const ::handsnet_tftrt_yolo::Image_BB_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x14bc22618fd0092fULL;
-  static const uint64_t static_value2 = 0xba3e105e603ce122ULL;
+  static const uint64_t static_value1 = 0xe36224c45647457fULL;
+  static const uint64_t static_value2 = 0x9e206d30e8546220ULL;
 };
 
 template<class ContainerAllocator>
@@ -154,12 +154,12 @@ struct Definition< ::handsnet_tftrt_yolo::Image_BB_<ContainerAllocator> >
   static const char* value()
   {
     return "int16 bb_number\n"
-"BB[] bb_array\n"
+"handsnet_tftrt_yolo/BB[] bb_array\n"
 "================================================================================\n"
 "MSG: handsnet_tftrt_yolo/BB\n"
-"string class\n"
+"string obj_class\n"
 "float32 confidence\n"
-"float32[4] coordinates\n"
+"float32[] coordinates\n"
 ;
   }
 

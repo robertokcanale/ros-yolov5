@@ -8,14 +8,14 @@ import struct
 
 
 class BB(genpy.Message):
-  _md5sum = "e5df805725a7fa5ef20dff2b5693f3d6"
+  _md5sum = "dfc87673751af1dddbaefa01947e8324"
   _type = "handsnet_tftrt_yolo/BB"
   _has_header = False  # flag to mark the presence of a Header object
-  _full_text = """string class
+  _full_text = """string obj_class
 float32 confidence
-float32[4] coordinates"""
-  __slots__ = ['class_','confidence','coordinates']
-  _slot_types = ['string','float32','float32[4]']
+float32[] coordinates"""
+  __slots__ = ['obj_class','confidence','coordinates']
+  _slot_types = ['string','float32','float32[]']
 
   def __init__(self, *args, **kwds):
     """
@@ -25,7 +25,7 @@ float32[4] coordinates"""
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       class_,confidence,coordinates
+       obj_class,confidence,coordinates
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -34,16 +34,16 @@ float32[4] coordinates"""
     if args or kwds:
       super(BB, self).__init__(*args, **kwds)
       # message fields cannot be None, assign default values for those that are
-      if self.class_ is None:
-        self.class_ = ''
+      if self.obj_class is None:
+        self.obj_class = ''
       if self.confidence is None:
         self.confidence = 0.
       if self.coordinates is None:
-        self.coordinates = [0.] * 4
+        self.coordinates = []
     else:
-      self.class_ = ''
+      self.obj_class = ''
       self.confidence = 0.
-      self.coordinates = [0.] * 4
+      self.coordinates = []
 
   def _get_types(self):
     """
@@ -57,7 +57,7 @@ float32[4] coordinates"""
     :param buff: buffer, ``StringIO``
     """
     try:
-      _x = self.class_
+      _x = self.obj_class
       length = len(_x)
       if python3 or type(_x) == unicode:
         _x = _x.encode('utf-8')
@@ -65,7 +65,10 @@ float32[4] coordinates"""
       buff.write(struct.Struct('<I%ss'%length).pack(length, _x))
       _x = self.confidence
       buff.write(_get_struct_f().pack(_x))
-      buff.write(_get_struct_4f().pack(*self.coordinates))
+      length = len(self.coordinates)
+      buff.write(_struct_I.pack(length))
+      pattern = '<%sf'%length
+      buff.write(struct.Struct(pattern).pack(*self.coordinates))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -83,15 +86,20 @@ float32[4] coordinates"""
       start = end
       end += length
       if python3:
-        self.class_ = str[start:end].decode('utf-8', 'rosmsg')
+        self.obj_class = str[start:end].decode('utf-8', 'rosmsg')
       else:
-        self.class_ = str[start:end]
+        self.obj_class = str[start:end]
       start = end
       end += 4
       (self.confidence,) = _get_struct_f().unpack(str[start:end])
       start = end
-      end += 16
-      self.coordinates = _get_struct_4f().unpack(str[start:end])
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      pattern = '<%sf'%length
+      start = end
+      s = struct.Struct(pattern)
+      end += s.size
+      self.coordinates = s.unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e)  # most likely buffer underfill
@@ -104,7 +112,7 @@ float32[4] coordinates"""
     :param numpy: numpy python module
     """
     try:
-      _x = self.class_
+      _x = self.obj_class
       length = len(_x)
       if python3 or type(_x) == unicode:
         _x = _x.encode('utf-8')
@@ -112,6 +120,9 @@ float32[4] coordinates"""
       buff.write(struct.Struct('<I%ss'%length).pack(length, _x))
       _x = self.confidence
       buff.write(_get_struct_f().pack(_x))
+      length = len(self.coordinates)
+      buff.write(_struct_I.pack(length))
+      pattern = '<%sf'%length
       buff.write(self.coordinates.tostring())
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
@@ -131,15 +142,20 @@ float32[4] coordinates"""
       start = end
       end += length
       if python3:
-        self.class_ = str[start:end].decode('utf-8', 'rosmsg')
+        self.obj_class = str[start:end].decode('utf-8', 'rosmsg')
       else:
-        self.class_ = str[start:end]
+        self.obj_class = str[start:end]
       start = end
       end += 4
       (self.confidence,) = _get_struct_f().unpack(str[start:end])
       start = end
-      end += 16
-      self.coordinates = numpy.frombuffer(str[start:end], dtype=numpy.float32, count=4)
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      pattern = '<%sf'%length
+      start = end
+      s = struct.Struct(pattern)
+      end += s.size
+      self.coordinates = numpy.frombuffer(str[start:end], dtype=numpy.float32, count=length)
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e)  # most likely buffer underfill
@@ -148,12 +164,6 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
-_struct_4f = None
-def _get_struct_4f():
-    global _struct_4f
-    if _struct_4f is None:
-        _struct_4f = struct.Struct("<4f")
-    return _struct_4f
 _struct_f = None
 def _get_struct_f():
     global _struct_f

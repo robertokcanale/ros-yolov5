@@ -76,16 +76,16 @@
   "handsnet_yolo/Image_BB")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<Image_BB>)))
   "Returns md5sum for a message object of type '<Image_BB>"
-  "14bc22618fd0092fba3e105e603ce122")
+  "e36224c45647457f9e206d30e8546220")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'Image_BB)))
   "Returns md5sum for a message object of type 'Image_BB"
-  "14bc22618fd0092fba3e105e603ce122")
+  "e36224c45647457f9e206d30e8546220")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<Image_BB>)))
   "Returns full string definition for message of type '<Image_BB>"
-  (cl:format cl:nil "int16 bb_number~%BB[] bb_array~%================================================================================~%MSG: handsnet_yolo/BB~%string class~%float32 confidence~%float32[4] coordinates~%~%"))
+  (cl:format cl:nil "int16 bb_number~%handsnet_yolo/BB[] bb_array~%================================================================================~%MSG: handsnet_yolo/BB~%string obj_class~%float32 confidence~%float32[] coordinates~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'Image_BB)))
   "Returns full string definition for message of type 'Image_BB"
-  (cl:format cl:nil "int16 bb_number~%BB[] bb_array~%================================================================================~%MSG: handsnet_yolo/BB~%string class~%float32 confidence~%float32[4] coordinates~%~%"))
+  (cl:format cl:nil "int16 bb_number~%handsnet_yolo/BB[] bb_array~%================================================================================~%MSG: handsnet_yolo/BB~%string obj_class~%float32 confidence~%float32[] coordinates~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <Image_BB>))
   (cl:+ 0
      2

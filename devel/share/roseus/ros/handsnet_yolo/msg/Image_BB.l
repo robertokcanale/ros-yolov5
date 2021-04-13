@@ -72,20 +72,20 @@
    self)
   )
 
-(setf (get handsnet_yolo::Image_BB :md5sum-) "14bc22618fd0092fba3e105e603ce122")
+(setf (get handsnet_yolo::Image_BB :md5sum-) "e36224c45647457f9e206d30e8546220")
 (setf (get handsnet_yolo::Image_BB :datatype-) "handsnet_yolo/Image_BB")
 (setf (get handsnet_yolo::Image_BB :definition-)
       "int16 bb_number
-BB[] bb_array
+handsnet_yolo/BB[] bb_array
 ================================================================================
 MSG: handsnet_yolo/BB
-string class
+string obj_class
 float32 confidence
-float32[4] coordinates
+float32[] coordinates
 ")
 
 
 
-(provide :handsnet_yolo/Image_BB "14bc22618fd0092fba3e105e603ce122")
+(provide :handsnet_yolo/Image_BB "e36224c45647457f9e206d30e8546220")
 
 

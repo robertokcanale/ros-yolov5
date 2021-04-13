@@ -9,16 +9,16 @@ import struct
 import handsnet_tftrt_yolo.msg
 
 class Image_BB(genpy.Message):
-  _md5sum = "14bc22618fd0092fba3e105e603ce122"
+  _md5sum = "e36224c45647457f9e206d30e8546220"
   _type = "handsnet_tftrt_yolo/Image_BB"
   _has_header = False  # flag to mark the presence of a Header object
   _full_text = """int16 bb_number
-BB[] bb_array
+handsnet_tftrt_yolo/BB[] bb_array
 ================================================================================
 MSG: handsnet_tftrt_yolo/BB
-string class
+string obj_class
 float32 confidence
-float32[4] coordinates"""
+float32[] coordinates"""
   __slots__ = ['bb_number','bb_array']
   _slot_types = ['int16','handsnet_tftrt_yolo/BB[]']
 
@@ -64,7 +64,7 @@ float32[4] coordinates"""
       length = len(self.bb_array)
       buff.write(_struct_I.pack(length))
       for val1 in self.bb_array:
-        _x = val1.class_
+        _x = val1.obj_class
         length = len(_x)
         if python3 or type(_x) == unicode:
           _x = _x.encode('utf-8')
@@ -72,7 +72,10 @@ float32[4] coordinates"""
         buff.write(struct.Struct('<I%ss'%length).pack(length, _x))
         _x = val1.confidence
         buff.write(_get_struct_f().pack(_x))
-        buff.write(_get_struct_4f().pack(*val1.coordinates))
+        length = len(val1.coordinates)
+        buff.write(_struct_I.pack(length))
+        pattern = '<%sf'%length
+        buff.write(struct.Struct(pattern).pack(*val1.coordinates))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -101,15 +104,20 @@ float32[4] coordinates"""
         start = end
         end += length
         if python3:
-          val1.class_ = str[start:end].decode('utf-8', 'rosmsg')
+          val1.obj_class = str[start:end].decode('utf-8', 'rosmsg')
         else:
-          val1.class_ = str[start:end]
+          val1.obj_class = str[start:end]
         start = end
         end += 4
         (val1.confidence,) = _get_struct_f().unpack(str[start:end])
         start = end
-        end += 16
-        val1.coordinates = _get_struct_4f().unpack(str[start:end])
+        end += 4
+        (length,) = _struct_I.unpack(str[start:end])
+        pattern = '<%sf'%length
+        start = end
+        s = struct.Struct(pattern)
+        end += s.size
+        val1.coordinates = s.unpack(str[start:end])
         self.bb_array.append(val1)
       return self
     except struct.error as e:
@@ -128,7 +136,7 @@ float32[4] coordinates"""
       length = len(self.bb_array)
       buff.write(_struct_I.pack(length))
       for val1 in self.bb_array:
-        _x = val1.class_
+        _x = val1.obj_class
         length = len(_x)
         if python3 or type(_x) == unicode:
           _x = _x.encode('utf-8')
@@ -136,6 +144,9 @@ float32[4] coordinates"""
         buff.write(struct.Struct('<I%ss'%length).pack(length, _x))
         _x = val1.confidence
         buff.write(_get_struct_f().pack(_x))
+        length = len(val1.coordinates)
+        buff.write(_struct_I.pack(length))
+        pattern = '<%sf'%length
         buff.write(val1.coordinates.tostring())
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
@@ -166,15 +177,20 @@ float32[4] coordinates"""
         start = end
         end += length
         if python3:
-          val1.class_ = str[start:end].decode('utf-8', 'rosmsg')
+          val1.obj_class = str[start:end].decode('utf-8', 'rosmsg')
         else:
-          val1.class_ = str[start:end]
+          val1.obj_class = str[start:end]
         start = end
         end += 4
         (val1.confidence,) = _get_struct_f().unpack(str[start:end])
         start = end
-        end += 16
-        val1.coordinates = numpy.frombuffer(str[start:end], dtype=numpy.float32, count=4)
+        end += 4
+        (length,) = _struct_I.unpack(str[start:end])
+        pattern = '<%sf'%length
+        start = end
+        s = struct.Struct(pattern)
+        end += s.size
+        val1.coordinates = numpy.frombuffer(str[start:end], dtype=numpy.float32, count=length)
         self.bb_array.append(val1)
       return self
     except struct.error as e:
@@ -184,12 +200,6 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
-_struct_4f = None
-def _get_struct_4f():
-    global _struct_4f
-    if _struct_4f is None:
-        _struct_4f = struct.Struct("<4f")
-    return _struct_4f
 _struct_f = None
 def _get_struct_f():
     global _struct_f
