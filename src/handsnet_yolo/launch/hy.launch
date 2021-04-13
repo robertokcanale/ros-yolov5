@@ -2,5 +2,6 @@
     <node name="tactile_image_publisher" pkg="handsnet_yolo" type="tactile_image_publisher.py" output="screen" cwd="node"/>
     <node name="hand_recognition" pkg="handsnet_yolo" type="hand_recognition.py" output="screen" cwd="node"/>
     <!--node name="hand_classification" pkg="handsnet_yolo" type="yolov5_classification.py" output="screen" cwd="node"/-->
+    <node name="BB_receiver" pkg="handsnet_yolo" type="BB_receiver.py" output="screen" cwd="node"/>
 
   </launch>

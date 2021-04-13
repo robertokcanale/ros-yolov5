@@ -205,7 +205,6 @@ include_directories(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
-catkin_install_python(PROGRAMS   src/yolov5_classification.py src/tactile_image_publisher.py src/hand_tftrt_recognition.py
-
+catkin_install_python(PROGRAMS   src/yolov5_classification.py src/tactile_image_publisher.py src/hand_tftrt_recognition.py BB_receiver.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )

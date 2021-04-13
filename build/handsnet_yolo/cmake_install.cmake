@@ -108,6 +108,6 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/handsnet_yolo" TYPE PROGRAM FILES "/home/maclab/Documents/RCanale/ros-yolov5/build/handsnet_yolo/catkin_generated/installspace/yolov5_class_minimized.py")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/handsnet_yolo" TYPE PROGRAM FILES "/home/maclab/Documents/RCanale/ros-yolov5/build/handsnet_yolo/catkin_generated/installspace/BB_receiver.py")
 endif()
 
