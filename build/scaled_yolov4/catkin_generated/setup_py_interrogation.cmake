@@ -1,0 +1,7 @@
+set(scaled_yolov4_SETUP_PY_SETUP_MODULE "distutils.core")
+set(scaled_yolov4_SETUP_PY_VERSION "0.0.0")
+set(scaled_yolov4_SETUP_PY_SCRIPTS "")
+set(scaled_yolov4_SETUP_PY_PACKAGES "models;utils")
+set(scaled_yolov4_SETUP_PY_PACKAGE_DIRS "src/models;src/utils")
+set(scaled_yolov4_SETUP_PY_MODULES "")
+set(scaled_yolov4_SETUP_PY_MODULE_DIRS "")

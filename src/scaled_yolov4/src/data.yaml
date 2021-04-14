@@ -1,7 +1,0 @@
-train: 6_classes/train/images
-val: 6_classes/valid/images
-test: 6_classes/test/images
-
-
-nc: 6
-names: ['index', 'middle', 'palm', 'pinkie', 'ring', 'thumb']

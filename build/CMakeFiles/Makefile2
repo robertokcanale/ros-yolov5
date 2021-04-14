@@ -56,6 +56,7 @@ CMAKE_BINARY_DIR = /home/maclab/Documents/RCanale/ros-yolov5/build
 all: gtest/all
 all: handsnet_tftrt_yolo\ /all
 all: handsnet_yolo/all
+all: scaled_yolov4/all
 all: timed_yolov5/all
 
 .PHONY : all
@@ -64,6 +65,7 @@ all: timed_yolov5/all
 preinstall: gtest/preinstall
 preinstall: handsnet_tftrt_yolo\ /preinstall
 preinstall: handsnet_yolo/preinstall
+preinstall: scaled_yolov4/preinstall
 preinstall: timed_yolov5/preinstall
 
 .PHONY : preinstall
@@ -77,6 +79,7 @@ clean: CMakeFiles/download_extra_data.dir/clean
 clean: gtest/clean
 clean: handsnet_tftrt_yolo\ /clean
 clean: handsnet_yolo/clean
+clean: scaled_yolov4/clean
 clean: timed_yolov5/clean
 
 .PHONY : clean
@@ -222,6 +225,36 @@ handsnet_yolo/clean: handsnet_yolo/CMakeFiles/handsnet_yolo_generate_messages_no
 handsnet_yolo/clean: handsnet_yolo/CMakeFiles/handsnet_yolo_gennodejs.dir/clean
 
 .PHONY : handsnet_yolo/clean
+
+#=============================================================================
+# Directory level rules for directory scaled_yolov4
+
+# Recursive "all" directory target.
+scaled_yolov4/all: scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages.dir/all
+
+.PHONY : scaled_yolov4/all
+
+# Recursive "preinstall" directory target.
+scaled_yolov4/preinstall:
+
+.PHONY : scaled_yolov4/preinstall
+
+# Recursive "clean" directory target.
+scaled_yolov4/clean: scaled_yolov4/CMakeFiles/scaled_yolov4_genlisp.dir/clean
+scaled_yolov4/clean: scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_py.dir/clean
+scaled_yolov4/clean: scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_BB.dir/clean
+scaled_yolov4/clean: scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages.dir/clean
+scaled_yolov4/clean: scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_cpp.dir/clean
+scaled_yolov4/clean: scaled_yolov4/CMakeFiles/scaled_yolov4_geneus.dir/clean
+scaled_yolov4/clean: scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_Image_BB.dir/clean
+scaled_yolov4/clean: scaled_yolov4/CMakeFiles/scaled_yolov4_gencpp.dir/clean
+scaled_yolov4/clean: scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_eus.dir/clean
+scaled_yolov4/clean: scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_lisp.dir/clean
+scaled_yolov4/clean: scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_nodejs.dir/clean
+scaled_yolov4/clean: scaled_yolov4/CMakeFiles/scaled_yolov4_genpy.dir/clean
+scaled_yolov4/clean: scaled_yolov4/CMakeFiles/scaled_yolov4_gennodejs.dir/clean
+
+.PHONY : scaled_yolov4/clean
 
 #=============================================================================
 # Directory level rules for directory timed_yolov5
@@ -1889,6 +1922,371 @@ handsnet_yolo_gennodejs: handsnet_yolo/CMakeFiles/handsnet_yolo_gennodejs.dir/ru
 handsnet_yolo/CMakeFiles/handsnet_yolo_gennodejs.dir/clean:
 	$(MAKE) -f handsnet_yolo/CMakeFiles/handsnet_yolo_gennodejs.dir/build.make handsnet_yolo/CMakeFiles/handsnet_yolo_gennodejs.dir/clean
 .PHONY : handsnet_yolo/CMakeFiles/handsnet_yolo_gennodejs.dir/clean
+
+#=============================================================================
+# Target rules for target scaled_yolov4/CMakeFiles/scaled_yolov4_genlisp.dir
+
+# All Build rule for target.
+scaled_yolov4/CMakeFiles/scaled_yolov4_genlisp.dir/all: scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_lisp.dir/all
+	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_genlisp.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_genlisp.dir/depend
+	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_genlisp.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_genlisp.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/maclab/Documents/RCanale/ros-yolov5/build/CMakeFiles --progress-num= "Built target scaled_yolov4_genlisp"
+.PHONY : scaled_yolov4/CMakeFiles/scaled_yolov4_genlisp.dir/all
+
+# Build rule for subdir invocation for target.
+scaled_yolov4/CMakeFiles/scaled_yolov4_genlisp.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/maclab/Documents/RCanale/ros-yolov5/build/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 scaled_yolov4/CMakeFiles/scaled_yolov4_genlisp.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/maclab/Documents/RCanale/ros-yolov5/build/CMakeFiles 0
+.PHONY : scaled_yolov4/CMakeFiles/scaled_yolov4_genlisp.dir/rule
+
+# Convenience name for target.
+scaled_yolov4_genlisp: scaled_yolov4/CMakeFiles/scaled_yolov4_genlisp.dir/rule
+
+.PHONY : scaled_yolov4_genlisp
+
+# clean rule for target.
+scaled_yolov4/CMakeFiles/scaled_yolov4_genlisp.dir/clean:
+	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_genlisp.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_genlisp.dir/clean
+.PHONY : scaled_yolov4/CMakeFiles/scaled_yolov4_genlisp.dir/clean
+
+#=============================================================================
+# Target rules for target scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_py.dir
+
+# All Build rule for target.
+scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_py.dir/all: handsnet_tftrt_yolo\ /CMakeFiles/std_msgs_generate_messages_py.dir/all
+scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_py.dir/all: scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_BB.dir/all
+scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_py.dir/all: scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_Image_BB.dir/all
+	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_py.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_py.dir/depend
+	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_py.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_py.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/maclab/Documents/RCanale/ros-yolov5/build/CMakeFiles --progress-num=42,43,44 "Built target scaled_yolov4_generate_messages_py"
+.PHONY : scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_py.dir/all
+
+# Build rule for subdir invocation for target.
+scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_py.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/maclab/Documents/RCanale/ros-yolov5/build/CMakeFiles 3
+	$(MAKE) -f CMakeFiles/Makefile2 scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_py.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/maclab/Documents/RCanale/ros-yolov5/build/CMakeFiles 0
+.PHONY : scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_py.dir/rule
+
+# Convenience name for target.
+scaled_yolov4_generate_messages_py: scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_py.dir/rule
+
+.PHONY : scaled_yolov4_generate_messages_py
+
+# clean rule for target.
+scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_py.dir/clean:
+	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_py.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_py.dir/clean
+.PHONY : scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_py.dir/clean
+
+#=============================================================================
+# Target rules for target scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_BB.dir
+
+# All Build rule for target.
+scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_BB.dir/all:
+	$(MAKE) -f scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_BB.dir/build.make scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_BB.dir/depend
+	$(MAKE) -f scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_BB.dir/build.make scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_BB.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/maclab/Documents/RCanale/ros-yolov5/build/CMakeFiles --progress-num= "Built target _scaled_yolov4_generate_messages_check_deps_BB"
+.PHONY : scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_BB.dir/all
+
+# Build rule for subdir invocation for target.
+scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_BB.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/maclab/Documents/RCanale/ros-yolov5/build/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_BB.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/maclab/Documents/RCanale/ros-yolov5/build/CMakeFiles 0
+.PHONY : scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_BB.dir/rule
+
+# Convenience name for target.
+_scaled_yolov4_generate_messages_check_deps_BB: scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_BB.dir/rule
+
+.PHONY : _scaled_yolov4_generate_messages_check_deps_BB
+
+# clean rule for target.
+scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_BB.dir/clean:
+	$(MAKE) -f scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_BB.dir/build.make scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_BB.dir/clean
+.PHONY : scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_BB.dir/clean
+
+#=============================================================================
+# Target rules for target scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages.dir
+
+# All Build rule for target.
+scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages.dir/all: scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_py.dir/all
+scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages.dir/all: scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_cpp.dir/all
+scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages.dir/all: scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_eus.dir/all
+scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages.dir/all: scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_lisp.dir/all
+scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages.dir/all: scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_nodejs.dir/all
+	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages.dir/depend
+	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/maclab/Documents/RCanale/ros-yolov5/build/CMakeFiles --progress-num= "Built target scaled_yolov4_generate_messages"
+.PHONY : scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages.dir/all
+
+# Build rule for subdir invocation for target.
+scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/maclab/Documents/RCanale/ros-yolov5/build/CMakeFiles 12
+	$(MAKE) -f CMakeFiles/Makefile2 scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/maclab/Documents/RCanale/ros-yolov5/build/CMakeFiles 0
+.PHONY : scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages.dir/rule
+
+# Convenience name for target.
+scaled_yolov4_generate_messages: scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages.dir/rule
+
+.PHONY : scaled_yolov4_generate_messages
+
+# clean rule for target.
+scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages.dir/clean:
+	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages.dir/clean
+.PHONY : scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages.dir/clean
+
+#=============================================================================
+# Target rules for target scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_cpp.dir
+
+# All Build rule for target.
+scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_cpp.dir/all: handsnet_tftrt_yolo\ /CMakeFiles/std_msgs_generate_messages_cpp.dir/all
+scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_cpp.dir/all: scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_BB.dir/all
+scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_cpp.dir/all: scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_Image_BB.dir/all
+	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_cpp.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_cpp.dir/depend
+	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_cpp.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_cpp.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/maclab/Documents/RCanale/ros-yolov5/build/CMakeFiles --progress-num=33,34 "Built target scaled_yolov4_generate_messages_cpp"
+.PHONY : scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_cpp.dir/all
+
+# Build rule for subdir invocation for target.
+scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_cpp.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/maclab/Documents/RCanale/ros-yolov5/build/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_cpp.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/maclab/Documents/RCanale/ros-yolov5/build/CMakeFiles 0
+.PHONY : scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+scaled_yolov4_generate_messages_cpp: scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_cpp.dir/rule
+
+.PHONY : scaled_yolov4_generate_messages_cpp
+
+# clean rule for target.
+scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_cpp.dir/clean:
+	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_cpp.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_cpp.dir/clean
+.PHONY : scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_cpp.dir/clean
+
+#=============================================================================
+# Target rules for target scaled_yolov4/CMakeFiles/scaled_yolov4_geneus.dir
+
+# All Build rule for target.
+scaled_yolov4/CMakeFiles/scaled_yolov4_geneus.dir/all: scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_eus.dir/all
+	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_geneus.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_geneus.dir/depend
+	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_geneus.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_geneus.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/maclab/Documents/RCanale/ros-yolov5/build/CMakeFiles --progress-num= "Built target scaled_yolov4_geneus"
+.PHONY : scaled_yolov4/CMakeFiles/scaled_yolov4_geneus.dir/all
+
+# Build rule for subdir invocation for target.
+scaled_yolov4/CMakeFiles/scaled_yolov4_geneus.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/maclab/Documents/RCanale/ros-yolov5/build/CMakeFiles 3
+	$(MAKE) -f CMakeFiles/Makefile2 scaled_yolov4/CMakeFiles/scaled_yolov4_geneus.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/maclab/Documents/RCanale/ros-yolov5/build/CMakeFiles 0
+.PHONY : scaled_yolov4/CMakeFiles/scaled_yolov4_geneus.dir/rule
+
+# Convenience name for target.
+scaled_yolov4_geneus: scaled_yolov4/CMakeFiles/scaled_yolov4_geneus.dir/rule
+
+.PHONY : scaled_yolov4_geneus
+
+# clean rule for target.
+scaled_yolov4/CMakeFiles/scaled_yolov4_geneus.dir/clean:
+	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_geneus.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_geneus.dir/clean
+.PHONY : scaled_yolov4/CMakeFiles/scaled_yolov4_geneus.dir/clean
+
+#=============================================================================
+# Target rules for target scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_Image_BB.dir
+
+# All Build rule for target.
+scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_Image_BB.dir/all:
+	$(MAKE) -f scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_Image_BB.dir/build.make scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_Image_BB.dir/depend
+	$(MAKE) -f scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_Image_BB.dir/build.make scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_Image_BB.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/maclab/Documents/RCanale/ros-yolov5/build/CMakeFiles --progress-num= "Built target _scaled_yolov4_generate_messages_check_deps_Image_BB"
+.PHONY : scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_Image_BB.dir/all
+
+# Build rule for subdir invocation for target.
+scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_Image_BB.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/maclab/Documents/RCanale/ros-yolov5/build/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_Image_BB.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/maclab/Documents/RCanale/ros-yolov5/build/CMakeFiles 0
+.PHONY : scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_Image_BB.dir/rule
+
+# Convenience name for target.
+_scaled_yolov4_generate_messages_check_deps_Image_BB: scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_Image_BB.dir/rule
+
+.PHONY : _scaled_yolov4_generate_messages_check_deps_Image_BB
+
+# clean rule for target.
+scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_Image_BB.dir/clean:
+	$(MAKE) -f scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_Image_BB.dir/build.make scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_Image_BB.dir/clean
+.PHONY : scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_Image_BB.dir/clean
+
+#=============================================================================
+# Target rules for target scaled_yolov4/CMakeFiles/scaled_yolov4_gencpp.dir
+
+# All Build rule for target.
+scaled_yolov4/CMakeFiles/scaled_yolov4_gencpp.dir/all: scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_cpp.dir/all
+	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_gencpp.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_gencpp.dir/depend
+	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_gencpp.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_gencpp.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/maclab/Documents/RCanale/ros-yolov5/build/CMakeFiles --progress-num= "Built target scaled_yolov4_gencpp"
+.PHONY : scaled_yolov4/CMakeFiles/scaled_yolov4_gencpp.dir/all
+
+# Build rule for subdir invocation for target.
+scaled_yolov4/CMakeFiles/scaled_yolov4_gencpp.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/maclab/Documents/RCanale/ros-yolov5/build/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 scaled_yolov4/CMakeFiles/scaled_yolov4_gencpp.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/maclab/Documents/RCanale/ros-yolov5/build/CMakeFiles 0
+.PHONY : scaled_yolov4/CMakeFiles/scaled_yolov4_gencpp.dir/rule
+
+# Convenience name for target.
+scaled_yolov4_gencpp: scaled_yolov4/CMakeFiles/scaled_yolov4_gencpp.dir/rule
+
+.PHONY : scaled_yolov4_gencpp
+
+# clean rule for target.
+scaled_yolov4/CMakeFiles/scaled_yolov4_gencpp.dir/clean:
+	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_gencpp.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_gencpp.dir/clean
+.PHONY : scaled_yolov4/CMakeFiles/scaled_yolov4_gencpp.dir/clean
+
+#=============================================================================
+# Target rules for target scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_eus.dir
+
+# All Build rule for target.
+scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_eus.dir/all: handsnet_tftrt_yolo\ /CMakeFiles/std_msgs_generate_messages_eus.dir/all
+scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_eus.dir/all: scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_BB.dir/all
+scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_eus.dir/all: scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_Image_BB.dir/all
+	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_eus.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_eus.dir/depend
+	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_eus.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_eus.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/maclab/Documents/RCanale/ros-yolov5/build/CMakeFiles --progress-num=35,36,37 "Built target scaled_yolov4_generate_messages_eus"
+.PHONY : scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_eus.dir/all
+
+# Build rule for subdir invocation for target.
+scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_eus.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/maclab/Documents/RCanale/ros-yolov5/build/CMakeFiles 3
+	$(MAKE) -f CMakeFiles/Makefile2 scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_eus.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/maclab/Documents/RCanale/ros-yolov5/build/CMakeFiles 0
+.PHONY : scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+scaled_yolov4_generate_messages_eus: scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_eus.dir/rule
+
+.PHONY : scaled_yolov4_generate_messages_eus
+
+# clean rule for target.
+scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_eus.dir/clean:
+	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_eus.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_eus.dir/clean
+.PHONY : scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_eus.dir/clean
+
+#=============================================================================
+# Target rules for target scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_lisp.dir
+
+# All Build rule for target.
+scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_lisp.dir/all: handsnet_tftrt_yolo\ /CMakeFiles/std_msgs_generate_messages_lisp.dir/all
+scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_lisp.dir/all: scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_BB.dir/all
+scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_lisp.dir/all: scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_Image_BB.dir/all
+	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_lisp.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_lisp.dir/depend
+	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_lisp.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_lisp.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/maclab/Documents/RCanale/ros-yolov5/build/CMakeFiles --progress-num=38,39 "Built target scaled_yolov4_generate_messages_lisp"
+.PHONY : scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_lisp.dir/all
+
+# Build rule for subdir invocation for target.
+scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_lisp.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/maclab/Documents/RCanale/ros-yolov5/build/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_lisp.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/maclab/Documents/RCanale/ros-yolov5/build/CMakeFiles 0
+.PHONY : scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+scaled_yolov4_generate_messages_lisp: scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_lisp.dir/rule
+
+.PHONY : scaled_yolov4_generate_messages_lisp
+
+# clean rule for target.
+scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_lisp.dir/clean:
+	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_lisp.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_lisp.dir/clean
+.PHONY : scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_lisp.dir/clean
+
+#=============================================================================
+# Target rules for target scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_nodejs.dir
+
+# All Build rule for target.
+scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_nodejs.dir/all: handsnet_tftrt_yolo\ /CMakeFiles/std_msgs_generate_messages_nodejs.dir/all
+scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_nodejs.dir/all: scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_BB.dir/all
+scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_nodejs.dir/all: scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_Image_BB.dir/all
+	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_nodejs.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_nodejs.dir/depend
+	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_nodejs.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_nodejs.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/maclab/Documents/RCanale/ros-yolov5/build/CMakeFiles --progress-num=40,41 "Built target scaled_yolov4_generate_messages_nodejs"
+.PHONY : scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_nodejs.dir/all
+
+# Build rule for subdir invocation for target.
+scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_nodejs.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/maclab/Documents/RCanale/ros-yolov5/build/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_nodejs.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/maclab/Documents/RCanale/ros-yolov5/build/CMakeFiles 0
+.PHONY : scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+scaled_yolov4_generate_messages_nodejs: scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_nodejs.dir/rule
+
+.PHONY : scaled_yolov4_generate_messages_nodejs
+
+# clean rule for target.
+scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_nodejs.dir/clean:
+	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_nodejs.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_nodejs.dir/clean
+.PHONY : scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_nodejs.dir/clean
+
+#=============================================================================
+# Target rules for target scaled_yolov4/CMakeFiles/scaled_yolov4_genpy.dir
+
+# All Build rule for target.
+scaled_yolov4/CMakeFiles/scaled_yolov4_genpy.dir/all: scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_py.dir/all
+	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_genpy.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_genpy.dir/depend
+	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_genpy.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_genpy.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/maclab/Documents/RCanale/ros-yolov5/build/CMakeFiles --progress-num= "Built target scaled_yolov4_genpy"
+.PHONY : scaled_yolov4/CMakeFiles/scaled_yolov4_genpy.dir/all
+
+# Build rule for subdir invocation for target.
+scaled_yolov4/CMakeFiles/scaled_yolov4_genpy.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/maclab/Documents/RCanale/ros-yolov5/build/CMakeFiles 3
+	$(MAKE) -f CMakeFiles/Makefile2 scaled_yolov4/CMakeFiles/scaled_yolov4_genpy.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/maclab/Documents/RCanale/ros-yolov5/build/CMakeFiles 0
+.PHONY : scaled_yolov4/CMakeFiles/scaled_yolov4_genpy.dir/rule
+
+# Convenience name for target.
+scaled_yolov4_genpy: scaled_yolov4/CMakeFiles/scaled_yolov4_genpy.dir/rule
+
+.PHONY : scaled_yolov4_genpy
+
+# clean rule for target.
+scaled_yolov4/CMakeFiles/scaled_yolov4_genpy.dir/clean:
+	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_genpy.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_genpy.dir/clean
+.PHONY : scaled_yolov4/CMakeFiles/scaled_yolov4_genpy.dir/clean
+
+#=============================================================================
+# Target rules for target scaled_yolov4/CMakeFiles/scaled_yolov4_gennodejs.dir
+
+# All Build rule for target.
+scaled_yolov4/CMakeFiles/scaled_yolov4_gennodejs.dir/all: scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_nodejs.dir/all
+	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_gennodejs.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_gennodejs.dir/depend
+	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_gennodejs.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_gennodejs.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/maclab/Documents/RCanale/ros-yolov5/build/CMakeFiles --progress-num= "Built target scaled_yolov4_gennodejs"
+.PHONY : scaled_yolov4/CMakeFiles/scaled_yolov4_gennodejs.dir/all
+
+# Build rule for subdir invocation for target.
+scaled_yolov4/CMakeFiles/scaled_yolov4_gennodejs.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/maclab/Documents/RCanale/ros-yolov5/build/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 scaled_yolov4/CMakeFiles/scaled_yolov4_gennodejs.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/maclab/Documents/RCanale/ros-yolov5/build/CMakeFiles 0
+.PHONY : scaled_yolov4/CMakeFiles/scaled_yolov4_gennodejs.dir/rule
+
+# Convenience name for target.
+scaled_yolov4_gennodejs: scaled_yolov4/CMakeFiles/scaled_yolov4_gennodejs.dir/rule
+
+.PHONY : scaled_yolov4_gennodejs
+
+# clean rule for target.
+scaled_yolov4/CMakeFiles/scaled_yolov4_gennodejs.dir/clean:
+	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_gennodejs.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_gennodejs.dir/clean
+.PHONY : scaled_yolov4/CMakeFiles/scaled_yolov4_gennodejs.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

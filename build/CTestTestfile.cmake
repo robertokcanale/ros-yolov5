@@ -7,4 +7,5 @@
 subdirs("gtest")
 subdirs("handsnet_tftrt_yolo ")
 subdirs("handsnet_yolo")
+subdirs("scaled_yolov4")
 subdirs("timed_yolov5")
