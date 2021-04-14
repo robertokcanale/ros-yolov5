@@ -107,10 +107,3 @@
 /home/maclab/Documents/RCanale/ros-yolov5/build/timed_yolov5/CMakeFiles/rebuild_cache.dir
 /home/maclab/Documents/RCanale/ros-yolov5/build/timed_yolov5/CMakeFiles/edit_cache.dir
 /home/maclab/Documents/RCanale/ros-yolov5/build/timed_yolov5/CMakeFiles/test.dir
-/home/maclab/Documents/RCanale/ros-yolov5/build/yolov5/CMakeFiles/install/strip.dir
-/home/maclab/Documents/RCanale/ros-yolov5/build/yolov5/CMakeFiles/install/local.dir
-/home/maclab/Documents/RCanale/ros-yolov5/build/yolov5/CMakeFiles/install.dir
-/home/maclab/Documents/RCanale/ros-yolov5/build/yolov5/CMakeFiles/list_install_components.dir
-/home/maclab/Documents/RCanale/ros-yolov5/build/yolov5/CMakeFiles/rebuild_cache.dir
-/home/maclab/Documents/RCanale/ros-yolov5/build/yolov5/CMakeFiles/edit_cache.dir
-/home/maclab/Documents/RCanale/ros-yolov5/build/yolov5/CMakeFiles/test.dir

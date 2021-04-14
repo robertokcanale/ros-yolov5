@@ -27,11 +27,10 @@ set(CMAKE_MAKEFILE_DEPENDS
   "handsnet_yolo/cmake/handsnet_yolo-genmsg.cmake"
   "timed_yolov5/catkin_generated/ordered_paths.cmake"
   "timed_yolov5/catkin_generated/package.cmake"
-  "yolov5/catkin_generated/ordered_paths.cmake"
-  "yolov5/catkin_generated/package.cmake"
   "/home/maclab/Documents/RCanale/ros-yolov5/devel/share/handsnet_tftrt_yolo/cmake/handsnet_tftrt_yolo-msg-paths.cmake"
   "/home/maclab/Documents/RCanale/ros-yolov5/devel/share/handsnet_yolo/cmake/handsnet_yolo-msg-paths.cmake"
   "/home/maclab/Documents/RCanale/ros-yolov5/src/CMakeLists.txt"
+  "/home/maclab/Documents/RCanale/ros-yolov5/src/handsnet_tftrt_yolo /BB_receiver.py"
   "/home/maclab/Documents/RCanale/ros-yolov5/src/handsnet_tftrt_yolo /CMakeLists.txt"
   "/home/maclab/Documents/RCanale/ros-yolov5/src/handsnet_tftrt_yolo /package.xml"
   "/home/maclab/Documents/RCanale/ros-yolov5/src/handsnet_tftrt_yolo /setup.py"
@@ -49,10 +48,6 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/home/maclab/Documents/RCanale/ros-yolov5/src/timed_yolov5/package.xml"
   "/home/maclab/Documents/RCanale/ros-yolov5/src/timed_yolov5/src/detect.py"
   "/home/maclab/Documents/RCanale/ros-yolov5/src/timed_yolov5/src/tactile_image_publisher.py"
-  "/home/maclab/Documents/RCanale/ros-yolov5/src/yolov5/CMakeLists.txt"
-  "/home/maclab/Documents/RCanale/ros-yolov5/src/yolov5/package.xml"
-  "/home/maclab/Documents/RCanale/ros-yolov5/src/yolov5/src/detect.py"
-  "/home/maclab/Documents/RCanale/ros-yolov5/src/yolov5/src/tactile_image_publisher.py"
   "/opt/ros/noetic/share/catkin/cmake/all.cmake"
   "/opt/ros/noetic/share/catkin/cmake/assert.cmake"
   "/opt/ros/noetic/share/catkin/cmake/atomic_configure_file.cmake"
@@ -261,7 +256,6 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "handsnet_tftrt_yolo /CMakeFiles/CMakeDirectoryInformation.cmake"
   "handsnet_yolo/CMakeFiles/CMakeDirectoryInformation.cmake"
   "timed_yolov5/CMakeFiles/CMakeDirectoryInformation.cmake"
-  "yolov5/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:

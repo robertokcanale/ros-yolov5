@@ -1,2 +1,2 @@
-handsnet_tftrt_yolo :handsnet_yolo:timed_yolov5:yolov5
+handsnet_tftrt_yolo :handsnet_yolo:timed_yolov5
 -DCATKIN_DEVEL_PREFIX=/home/maclab/Documents/RCanale/ros-yolov5/devel -DCMAKE_INSTALL_PREFIX=/home/maclab/Documents/RCanale/ros-yolov5/install -G Unix Makefiles

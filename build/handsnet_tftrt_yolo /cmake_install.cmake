@@ -107,3 +107,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/handsnet_tftrt_yolo" TYPE PROGRAM FILES "/home/maclab/Documents/RCanale/ros-yolov5/build/handsnet_tftrt_yolo /catkin_generated/installspace/hand_tftrt_recognition.py")
 endif()
 
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/handsnet_tftrt_yolo" TYPE PROGRAM FILES "/home/maclab/Documents/RCanale/ros-yolov5/build/handsnet_tftrt_yolo /catkin_generated/installspace/BB_receiver.py")
+endif()
+

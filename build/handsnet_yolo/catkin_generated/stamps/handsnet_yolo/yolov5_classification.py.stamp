@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-from numpy.core.fromnumeric import size
 import rospy
 import argparse
 from std_msgs.msg import Int16

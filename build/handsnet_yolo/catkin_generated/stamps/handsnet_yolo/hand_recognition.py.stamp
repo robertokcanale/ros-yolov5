@@ -9,7 +9,6 @@ from std_msgs.msg import Int16
 from sensor_msgs.msg import Image as TactileImage
 from PIL import Image
 import ros_numpy
-import os
 
 tactile_image =  np.zeros((1, 100, 68, 3))
 yolo_image = TactileImage()
