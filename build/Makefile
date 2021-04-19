@@ -115,8 +115,8 @@ rebuild_cache/fast: rebuild_cache
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
+	/usr/bin/cmake-gui -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -947,175 +947,6 @@ handsnet_yolo_gennodejs/fast:
 	$(MAKE) -f handsnet_yolo/CMakeFiles/handsnet_yolo_gennodejs.dir/build.make handsnet_yolo/CMakeFiles/handsnet_yolo_gennodejs.dir/build
 .PHONY : handsnet_yolo_gennodejs/fast
 
-#=============================================================================
-# Target rules for targets named scaled_yolov4_genlisp
-
-# Build rule for target.
-scaled_yolov4_genlisp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 scaled_yolov4_genlisp
-.PHONY : scaled_yolov4_genlisp
-
-# fast build rule for target.
-scaled_yolov4_genlisp/fast:
-	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_genlisp.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_genlisp.dir/build
-.PHONY : scaled_yolov4_genlisp/fast
-
-#=============================================================================
-# Target rules for targets named scaled_yolov4_generate_messages_py
-
-# Build rule for target.
-scaled_yolov4_generate_messages_py: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 scaled_yolov4_generate_messages_py
-.PHONY : scaled_yolov4_generate_messages_py
-
-# fast build rule for target.
-scaled_yolov4_generate_messages_py/fast:
-	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_py.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_py.dir/build
-.PHONY : scaled_yolov4_generate_messages_py/fast
-
-#=============================================================================
-# Target rules for targets named _scaled_yolov4_generate_messages_check_deps_BB
-
-# Build rule for target.
-_scaled_yolov4_generate_messages_check_deps_BB: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _scaled_yolov4_generate_messages_check_deps_BB
-.PHONY : _scaled_yolov4_generate_messages_check_deps_BB
-
-# fast build rule for target.
-_scaled_yolov4_generate_messages_check_deps_BB/fast:
-	$(MAKE) -f scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_BB.dir/build.make scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_BB.dir/build
-.PHONY : _scaled_yolov4_generate_messages_check_deps_BB/fast
-
-#=============================================================================
-# Target rules for targets named scaled_yolov4_generate_messages
-
-# Build rule for target.
-scaled_yolov4_generate_messages: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 scaled_yolov4_generate_messages
-.PHONY : scaled_yolov4_generate_messages
-
-# fast build rule for target.
-scaled_yolov4_generate_messages/fast:
-	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages.dir/build
-.PHONY : scaled_yolov4_generate_messages/fast
-
-#=============================================================================
-# Target rules for targets named scaled_yolov4_generate_messages_cpp
-
-# Build rule for target.
-scaled_yolov4_generate_messages_cpp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 scaled_yolov4_generate_messages_cpp
-.PHONY : scaled_yolov4_generate_messages_cpp
-
-# fast build rule for target.
-scaled_yolov4_generate_messages_cpp/fast:
-	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_cpp.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_cpp.dir/build
-.PHONY : scaled_yolov4_generate_messages_cpp/fast
-
-#=============================================================================
-# Target rules for targets named scaled_yolov4_geneus
-
-# Build rule for target.
-scaled_yolov4_geneus: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 scaled_yolov4_geneus
-.PHONY : scaled_yolov4_geneus
-
-# fast build rule for target.
-scaled_yolov4_geneus/fast:
-	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_geneus.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_geneus.dir/build
-.PHONY : scaled_yolov4_geneus/fast
-
-#=============================================================================
-# Target rules for targets named _scaled_yolov4_generate_messages_check_deps_Image_BB
-
-# Build rule for target.
-_scaled_yolov4_generate_messages_check_deps_Image_BB: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _scaled_yolov4_generate_messages_check_deps_Image_BB
-.PHONY : _scaled_yolov4_generate_messages_check_deps_Image_BB
-
-# fast build rule for target.
-_scaled_yolov4_generate_messages_check_deps_Image_BB/fast:
-	$(MAKE) -f scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_Image_BB.dir/build.make scaled_yolov4/CMakeFiles/_scaled_yolov4_generate_messages_check_deps_Image_BB.dir/build
-.PHONY : _scaled_yolov4_generate_messages_check_deps_Image_BB/fast
-
-#=============================================================================
-# Target rules for targets named scaled_yolov4_gencpp
-
-# Build rule for target.
-scaled_yolov4_gencpp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 scaled_yolov4_gencpp
-.PHONY : scaled_yolov4_gencpp
-
-# fast build rule for target.
-scaled_yolov4_gencpp/fast:
-	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_gencpp.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_gencpp.dir/build
-.PHONY : scaled_yolov4_gencpp/fast
-
-#=============================================================================
-# Target rules for targets named scaled_yolov4_generate_messages_eus
-
-# Build rule for target.
-scaled_yolov4_generate_messages_eus: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 scaled_yolov4_generate_messages_eus
-.PHONY : scaled_yolov4_generate_messages_eus
-
-# fast build rule for target.
-scaled_yolov4_generate_messages_eus/fast:
-	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_eus.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_eus.dir/build
-.PHONY : scaled_yolov4_generate_messages_eus/fast
-
-#=============================================================================
-# Target rules for targets named scaled_yolov4_generate_messages_lisp
-
-# Build rule for target.
-scaled_yolov4_generate_messages_lisp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 scaled_yolov4_generate_messages_lisp
-.PHONY : scaled_yolov4_generate_messages_lisp
-
-# fast build rule for target.
-scaled_yolov4_generate_messages_lisp/fast:
-	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_lisp.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_lisp.dir/build
-.PHONY : scaled_yolov4_generate_messages_lisp/fast
-
-#=============================================================================
-# Target rules for targets named scaled_yolov4_generate_messages_nodejs
-
-# Build rule for target.
-scaled_yolov4_generate_messages_nodejs: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 scaled_yolov4_generate_messages_nodejs
-.PHONY : scaled_yolov4_generate_messages_nodejs
-
-# fast build rule for target.
-scaled_yolov4_generate_messages_nodejs/fast:
-	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_nodejs.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_generate_messages_nodejs.dir/build
-.PHONY : scaled_yolov4_generate_messages_nodejs/fast
-
-#=============================================================================
-# Target rules for targets named scaled_yolov4_genpy
-
-# Build rule for target.
-scaled_yolov4_genpy: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 scaled_yolov4_genpy
-.PHONY : scaled_yolov4_genpy
-
-# fast build rule for target.
-scaled_yolov4_genpy/fast:
-	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_genpy.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_genpy.dir/build
-.PHONY : scaled_yolov4_genpy/fast
-
-#=============================================================================
-# Target rules for targets named scaled_yolov4_gennodejs
-
-# Build rule for target.
-scaled_yolov4_gennodejs: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 scaled_yolov4_gennodejs
-.PHONY : scaled_yolov4_gennodejs
-
-# fast build rule for target.
-scaled_yolov4_gennodejs/fast:
-	$(MAKE) -f scaled_yolov4/CMakeFiles/scaled_yolov4_gennodejs.dir/build.make scaled_yolov4/CMakeFiles/scaled_yolov4_gennodejs.dir/build
-.PHONY : scaled_yolov4_gennodejs/fast
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -1189,19 +1020,6 @@ help:
 	@echo "... geometry_msgs_generate_messages_lisp"
 	@echo "... handsnet_yolo_generate_messages_nodejs"
 	@echo "... handsnet_yolo_gennodejs"
-	@echo "... scaled_yolov4_genlisp"
-	@echo "... scaled_yolov4_generate_messages_py"
-	@echo "... _scaled_yolov4_generate_messages_check_deps_BB"
-	@echo "... scaled_yolov4_generate_messages"
-	@echo "... scaled_yolov4_generate_messages_cpp"
-	@echo "... scaled_yolov4_geneus"
-	@echo "... _scaled_yolov4_generate_messages_check_deps_Image_BB"
-	@echo "... scaled_yolov4_gencpp"
-	@echo "... scaled_yolov4_generate_messages_eus"
-	@echo "... scaled_yolov4_generate_messages_lisp"
-	@echo "... scaled_yolov4_generate_messages_nodejs"
-	@echo "... scaled_yolov4_genpy"
-	@echo "... scaled_yolov4_gennodejs"
 .PHONY : help
 
 
