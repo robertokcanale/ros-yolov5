@@ -25,6 +25,9 @@ def callback_image(data):
     #IMAGE PROCESSING
     cv_image = CvBridge().imgmsg_to_cv2(data, "rgb8") #Here I can Reconstruct my image properly
     new_cv_image = np.transpose(cv_image, (2, 0, 1)) #transposing the image for processing
+    
+    print("I_before:", new_cv_image, type(new_cv_image), np.shape(new_cv_image))
+
     img = torch.from_numpy(new_cv_image).to(device)
     img = img.float()  
     img /= 255.0  # 0 - 255 to 0.0 - 1.0

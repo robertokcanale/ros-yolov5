@@ -1,0 +1,8 @@
+prefix=/home/maclab/Documents/RCanale/ros-yolov5/install
+
+Name: yolo_viz
+Description: Description of yolo_viz
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

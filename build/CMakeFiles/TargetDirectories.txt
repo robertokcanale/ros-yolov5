@@ -107,3 +107,15 @@
 /home/maclab/Documents/RCanale/ros-yolov5/build/timed_yolov5/CMakeFiles/rebuild_cache.dir
 /home/maclab/Documents/RCanale/ros-yolov5/build/timed_yolov5/CMakeFiles/edit_cache.dir
 /home/maclab/Documents/RCanale/ros-yolov5/build/timed_yolov5/CMakeFiles/test.dir
+/home/maclab/Documents/RCanale/ros-yolov5/build/yolo_viz/CMakeFiles/install/strip.dir
+/home/maclab/Documents/RCanale/ros-yolov5/build/yolo_viz/CMakeFiles/install.dir
+/home/maclab/Documents/RCanale/ros-yolov5/build/yolo_viz/CMakeFiles/list_install_components.dir
+/home/maclab/Documents/RCanale/ros-yolov5/build/yolo_viz/CMakeFiles/rebuild_cache.dir
+/home/maclab/Documents/RCanale/ros-yolov5/build/yolo_viz/CMakeFiles/edit_cache.dir
+/home/maclab/Documents/RCanale/ros-yolov5/build/yolo_viz/CMakeFiles/test.dir
+/home/maclab/Documents/RCanale/ros-yolov5/build/yolo_viz/CMakeFiles/visualization_msgs_generate_messages_py.dir
+/home/maclab/Documents/RCanale/ros-yolov5/build/yolo_viz/CMakeFiles/install/local.dir
+/home/maclab/Documents/RCanale/ros-yolov5/build/yolo_viz/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir
+/home/maclab/Documents/RCanale/ros-yolov5/build/yolo_viz/CMakeFiles/visualization_msgs_generate_messages_eus.dir
+/home/maclab/Documents/RCanale/ros-yolov5/build/yolo_viz/CMakeFiles/visualization_msgs_generate_messages_lisp.dir
+/home/maclab/Documents/RCanale/ros-yolov5/build/yolo_viz/CMakeFiles/visualization_msgs_generate_messages_cpp.dir

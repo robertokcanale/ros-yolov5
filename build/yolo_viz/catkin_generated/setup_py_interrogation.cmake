@@ -1,0 +1,7 @@
+set(yolo_viz_SETUP_PY_SETUP_MODULE "distutils.core")
+set(yolo_viz_SETUP_PY_VERSION "0.0.0")
+set(yolo_viz_SETUP_PY_SCRIPTS "")
+set(yolo_viz_SETUP_PY_PACKAGES "models;utils;functions")
+set(yolo_viz_SETUP_PY_PACKAGE_DIRS "src/models;src/utils;src/functions")
+set(yolo_viz_SETUP_PY_MODULES "")
+set(yolo_viz_SETUP_PY_MODULE_DIRS "")
