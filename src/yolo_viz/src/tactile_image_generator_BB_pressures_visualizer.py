@@ -7,6 +7,7 @@ import time
 import os
 import torch
 import cv2
+import random
 import time
 from cv_bridge import CvBridge
 import cv2
@@ -33,12 +34,7 @@ if __name__ == '__main__':
     S = rsl.RobotSkin("src/yolo_viz/src/calibration_files/collaborate_handle_1_ale.json")
     u = rsl.SkinUpdaterFromShMem(S)
     T = rsl.TactileMap(S,0)
-    #BUILD MESH VISUALIZER
-    V = rsl.RobotSkinViewer(500,500,20000)
-    V2 = rsl.RobotSkinViewer(500,500,20000)
-    #RENDER MESH
-    V.render_object(S,"Robot")
-    V2.render_object(S,"Robot_Markers")
+
     #BUILD IMAGE
     TIB = rsl.TactileImageBuilder(T)
     TIB.build_tactile_image()
@@ -81,11 +77,7 @@ if __name__ == '__main__':
         I = I.reshape([rows,cols]) #reshape it into a 2d array
         I_backtorgb = cv2.cvtColor(I,cv2.COLOR_GRAY2RGB)  #converting from grayscale to rgb 
         I_resized = cv2.resize(I_backtorgb, (416,416), interpolation=cv2.INTER_AREA) #resize it for yolo
-        #erode_kernel = np.ones((2, 2), np.uint8) #erode the image, it might do prediction a bit better
-        #I_erode = cv2.erode(I_resized, erode_kernel) 
-        #I_gaussfilter = cv2.blur(I_erode,(3,3),0)   #apply gaussian filtering  
         I_transposed = np.transpose(I_resized, (2, 0, 1)) #transposing the image for processing
-        print(" I get here")
 
         #YOLO AND DATA PREPROCESSING
         img = torch.from_numpy(I_transposed).to(device)
@@ -118,10 +110,10 @@ if __name__ == '__main__':
         bb_predictions_reshaped, I_backtorgb = bounding_box_predictions_reshaped(bb_predictions, bb_number, I_backtorgb, colors, rows, cols)
         
         #ACTIVATED TAXELS FOR EACH BB
-        taxel_predictions, taxel_predictions_info, face_centers = bb_active_taxel(bb_number, S, bb_predictions_reshaped, TIB, skin_faces)
+        taxel_predictions, pixel_positions, taxel_predictions_info = bb_active_taxel(bb_number, T, bb_predictions_reshaped, TIB, skin_faces)
         
         #GET RESPONSE OF ACTIVATED TAXELS
-        total_taxel_responses, average_responses, total_taxels_position, bb_centroid = taxel_responses(bb_number, S, taxel_predictions, taxel_predictions_info)
+        #total_taxel_responses, average_responses, total_taxels_position, bb_centroid = taxel_responses(bb_number, S, taxel_predictions, taxel_predictions_info)
 
         #print("Taxel Predictions:", taxel_predictions) #here I have all the taxel indexes of my predictions, however i need to clean them 
         #print("Taxel Predictions Info:", taxel_predictions_info) #here I have all the taxel indexes of my predictions, however i need to clean them 
@@ -139,18 +131,22 @@ if __name__ == '__main__':
         marker_array  = MarkerArray()
         for n in range(bb_number):
             contact_color = color_dict[taxel_predictions_info[n][0]]
-            for i in range(len(total_taxels_position[n])):
-                marker = initialize_marker(total_taxels_position[n][i], contact_color,(n*100 +i))
-                marker_array.markers.append(marker)
+            counter = 0
+            for i in range(len(pixel_positions[n])):
+                marker = initialize_marker(pixel_positions[n][i], contact_color,(n*100 +counter))
+                a = random.randint(0,30)
+                if a == 5:
+                    marker_array.markers.append(marker)
+                counter +=1
         pub.publish(marker_array)
         
         
         im_to_show = cv2.resize(I_resized, (500, 500), interpolation = cv2.INTER_AREA)
-        cv2.imshow('Tactile Image',im_to_show)
-        cv2.waitKey(1)
+        #cv2.imshow('Tactile Image',im_to_show)
+        #cv2.waitKey(1)
         img_pub.publish(br.cv2_to_imgmsg(im_to_show))
         #cv2.imshow('Tactile Image  Original',I_backtorgb)
         #cv2.waitKey(1)
 
-        time.sleep(1)
-        V.remove_markers()
+        time.sleep(0.1)
+
