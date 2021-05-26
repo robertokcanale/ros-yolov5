@@ -8,6 +8,8 @@ import time
 import rospy
 from visualization_msgs.msg import MarkerArray
 from visualization_msgs.msg import Marker
+from geometry_msgs.msg import Point
+from std_msgs.msg import ColorRGBA
 from models.experimental import attempt_load
 from utils.datasets import LoadStreams, LoadImages
 from utils.general import check_img_size, check_requirements, check_imshow, non_max_suppression, apply_classifier, \
@@ -111,28 +113,35 @@ def bb_active_taxel (bb_number, T, bb_predictions_reshaped, TIB, skin_faces):
     return taxel_predictions, pixel_positions, taxel_predictions_info
 
 #Get taxel responses for all bounding boxes 
-def taxel_responses(bb_number, S, taxel_predictions, taxel_predictions_info):
+def get_taxel_data(bb_number, S, taxel_predictions, taxel_predictions_info, pixel_positions):
     total_taxel_responses = np.empty((bb_number,), dtype = object)
     total_taxels_position = np.empty((bb_number,), dtype = object)
+    total_taxel_normals = np.empty((bb_number,), dtype = object)
     average_responses = np.empty((bb_number,), dtype = object)
     bb_centroid = np.empty((bb_number,), dtype = object)
-
-    #get total responses
+    bb_normal = np.empty((bb_number,), dtype = object)
+    #TOTAL RESPONSES
     for n in range(bb_number):
         taxel_response = [] #empty array for the responses of a single bounding box
         taxels_position = [] #empty array for the idus of a single bounding box
+        taxel_normal = [] #empty array for the normals single bounding box
         for i in taxel_predictions[n]:
             if S.taxels[i].get_taxel_response() != 0: 
                 taxel_response.append(S.taxels[i].get_taxel_response()) 
                 taxels_position.append(S.taxels[i].get_taxel_position()) 
+                taxel_normal.append(S.taxels[i].get_taxel_normal()) 
+                    
+
         if taxel_response == [] or taxels_position == []:
             total_taxel_responses[n] = []
             total_taxels_position[n] = []
+            total_taxel_normals[n] = []
         else: 
             total_taxel_responses[n] = taxel_response
             total_taxels_position[n] = taxels_position
+            total_taxel_normals[n] = taxel_normal
     
-    #get average responses including taxels with 0 response
+    #AVERAGE RESPONSES including taxels with 0 response
     for n in range(bb_number):
         if len(total_taxels_position[n]) != 0:
             average_response = sum(total_taxel_responses[n])/taxel_predictions_info[n][2]
@@ -141,26 +150,41 @@ def taxel_responses(bb_number, S, taxel_predictions, taxel_predictions_info):
         else:
             average_responses[n] = 0.0
     
-     
-    #get average response position
+    #AVERAGE POSITION
     for n in range(bb_number):
         average_position = [0.0,0.0,0.0]
-        if len(total_taxels_position[n]) != 0:
-            for i in range(len(total_taxels_position[n])):
-                average_position[0] = average_position[0] + total_taxels_position[n][i][0]
-                average_position[1] = average_position[1] + total_taxels_position[n][i][1]
-                average_position[2] = average_position[2] + total_taxels_position[n][i][2]
-            average_position[0] = average_position[0] /len(total_taxels_position[n])
-            average_position[1] = average_position[1] /len(total_taxels_position[n])
-            average_position[2] = average_position[2] /len(total_taxels_position[n])
+        if len(pixel_positions[n]) != 0:
+            for i in range(len(pixel_positions[n])):
+                average_position[0] = average_position[0] + pixel_positions[n][i][0]
+                average_position[1] = average_position[1] + pixel_positions[n][i][1]
+                average_position[2] = average_position[2] + pixel_positions[n][i][2]
+            average_position[0] = average_position[0] /len(pixel_positions[n])
+            average_position[1] = average_position[1] /len(pixel_positions[n])
+            average_position[2] = average_position[2] /len(pixel_positions[n])
 
             bb_centroid[n] = average_position
             #print("Position of Centroid", taxel_predictions_info[n][0], "is", bb_centroid[n])
         else:
             bb_centroid[n] = []
-    
-    return total_taxel_responses, average_responses, total_taxels_position, bb_centroid
 
+    #AVERAGE NORMAL
+    for n in range(bb_number):
+        average_normal = [0.0,0.0,0.0]
+        if len(pixel_positions[n]) != 0:
+            for i in range(len(pixel_positions[n])):
+                average_normal[0] = average_normal[0] - pixel_positions[n][i][0]
+                average_normal[1] = average_normal[1] - pixel_positions[n][i][1]
+                average_normal[2] = average_normal[2] - pixel_positions[n][i][2]
+            average_normal[0] = average_normal[0] /len(pixel_positions[n])
+            average_normal[1] = average_normal[1] /len(pixel_positions[n])
+            average_normal[2] = average_normal[2] /len(pixel_positions[n])
+
+            bb_normal[n] = average_normal
+            #print("Position of Centroid", taxel_predictions_info[n][0], "is", bb_centroid[n])
+        else:
+            bb_normal[n] = []  
+
+    return total_taxel_responses, average_responses, total_taxels_position, bb_centroid, bb_normal,  total_taxel_normals
 
 def total_responses_visualization(bb_number, V, pixel_positions, taxel_predictions_info, color_dict):
     if bb_number !=0:
@@ -190,17 +214,49 @@ def total_faces_visualization(bb_number, V, face_centers, taxel_predictions_info
                 V.add_marker(counter,face_centers[n][i], contact_color)
                 counter += 1
 
-def initialize_marker(marker_position, color, id):
+def initialize_contact_marker_point(marker_position, color, id):
+    marker = Marker()
+    marker.id =  id
+    marker.header.frame_id = "my_frame"
+    marker.header.stamp    = rospy.get_rostime()
+    marker.type = marker.POINTS
+    marker.action = marker.ADD
+    marker.scale.x = 0.08
+    marker.scale.y = 0.08
+    marker.scale.z = 0.08
+    p = Point()
+    triplePoints =[]
+    quadColor = []
+    p.x = marker_position[0]*30
+    p.y = marker_position[1]*30
+    p.z = marker_position[2]*30
+    triplePoints.append(p)
+    marker.points = triplePoints
+    marker.pose.orientation.x = 0
+    marker.pose.orientation.y = 0
+    marker.pose.orientation.z = 0
+    marker.pose.orientation.w = 1.0
+    c = ColorRGBA()
+    c.r = color[0]
+    c.g = color[1]
+    c.b = color[2]
+    c.a = color[3]
+    quadColor.append(c)
+    marker.colors = quadColor
+    marker.lifetime = rospy.Duration(0.5)
+
+    return marker
+
+def initialize_contact_marker_spheres(marker_position, color, id):
     marker = Marker()
     marker.id =  id
     marker.header.frame_id = "my_frame"
     marker.header.stamp    = rospy.get_rostime()
     marker.type = marker.SPHERE
     marker.action = marker.ADD
-    marker.action = 0
-    marker.scale.x = 0.08
-    marker.scale.y = 0.08
-    marker.scale.z = 0.08
+    marker.scale.x = 0.02
+    marker.scale.y = 0.02
+    marker.scale.z = 0.02
     marker.pose.position.x = marker_position[0]*30
     marker.pose.position.y = marker_position[1]*30
     marker.pose.position.z = marker_position[2]*30
@@ -214,6 +270,27 @@ def initialize_marker(marker_position, color, id):
     marker.color.a = color[3]
     marker.lifetime = rospy.Duration(0.2)
 
+    return marker
+
+
+def initialize_marker_responses(marker_position, bb_normal, color, id):
+    marker = Marker()
+    marker.id =  id
+    marker.header.frame_id = "my_frame"
+    marker.header.stamp    = rospy.get_rostime()
+    marker.type = marker.ARROW
+    marker.action = marker.ADD
+    marker.action = 0
+    marker.scale.x = 0.08
+    marker.scale.y = 0.08
+    marker.scale.z = 0.08
+    marker.pose.orientation.w = 1.0
+    marker.color.r = color[0]
+    marker.color.g = color[1]
+    marker.color.b = color[2]
+    marker.color.a = color[3]
+    marker.points = [ marker_position, bb_normal ]
+    marker.lifetime = rospy.Duration(0.2)
 
     return marker
 

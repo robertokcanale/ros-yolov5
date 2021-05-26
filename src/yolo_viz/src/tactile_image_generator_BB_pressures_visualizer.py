@@ -113,7 +113,7 @@ if __name__ == '__main__':
         taxel_predictions, pixel_positions, taxel_predictions_info = bb_active_taxel(bb_number, T, bb_predictions_reshaped, TIB, skin_faces)
         
         #GET RESPONSE OF ACTIVATED TAXELS
-        #total_taxel_responses, average_responses, total_taxels_position, bb_centroid = taxel_responses(bb_number, S, taxel_predictions, taxel_predictions_info)
+        total_taxel_responses, average_responses, total_taxels_position, bb_centroid, bb_normal,  total_taxel_normals = get_taxel_data(bb_number, S, taxel_predictions, taxel_predictions_info, pixel_positions)
 
         #print("Taxel Predictions:", taxel_predictions) #here I have all the taxel indexes of my predictions, however i need to clean them 
         #print("Taxel Predictions Info:", taxel_predictions_info) #here I have all the taxel indexes of my predictions, however i need to clean them 
@@ -121,6 +121,7 @@ if __name__ == '__main__':
         #print("Taxel Positions:", total_taxels_position)
         #print("Average Taxel Responses:", average_responses) 
         #print("Average Taxel Positions:", bb_centroid)
+        #print("Average BB Taxels Normals:", bb_normal)
         
         #VISUALIZE MARKERS on OPENGL
         #total_responses_visualization(bb_number, V, total_taxels_position, taxel_predictions_info, color_dict )
@@ -128,17 +129,28 @@ if __name__ == '__main__':
         #average_responses_visualization(bb_number, V, bb_centroid, taxel_predictions_info, color_dict )
 
         #VISUALIZE MARKERS on RviZ
-        marker_array  = MarkerArray()
+        bb_marker_array  = MarkerArray()
         for n in range(bb_number):
             contact_color = color_dict[taxel_predictions_info[n][0]]
             counter = 0
             for i in range(len(pixel_positions[n])):
-                marker = initialize_marker(pixel_positions[n][i], contact_color,(n*100 +counter))
-                a = random.randint(0,30)
+                marker = initialize_contact_marker_spheres(pixel_positions[n][i], contact_color,(n*100 +counter))
+                a = random.randint(0,10)
                 if a == 5:
-                    marker_array.markers.append(marker)
+                    bb_marker_array.markers.append(marker)
                 counter +=1
-        pub.publish(marker_array)
+
+        #VISUALIZE Total Normals on Rviz
+        normal_array  = MarkerArray()
+        #counter = 0
+        #for n in range(bb_number):
+           # contact_color = color_dict[taxel_predictions_info[n][0]]
+            #marker = initialize_marker_responses(bb_centroid[n],bb_normal[n], contact_color,(n*100 +counter))
+            #bb_marker_array.markers.append(marker)
+           # counter +=1
+
+
+        pub.publish(bb_marker_array)
         
         
         im_to_show = cv2.resize(I_resized, (500, 500), interpolation = cv2.INTER_AREA)
@@ -148,5 +160,5 @@ if __name__ == '__main__':
         #cv2.imshow('Tactile Image  Original',I_backtorgb)
         #cv2.waitKey(1)
 
-        time.sleep(0.1)
+        #time.sleep(0.1)
 
