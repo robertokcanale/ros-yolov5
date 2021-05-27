@@ -131,7 +131,6 @@ def get_taxel_data(bb_number, S, taxel_predictions, taxel_predictions_info, pixe
                 taxels_position.append(S.taxels[i].get_taxel_position()) 
                 taxel_normal.append(S.taxels[i].get_taxel_normal()) 
                     
-
         if taxel_response == [] or taxels_position == []:
             total_taxel_responses[n] = []
             total_taxels_position[n] = []
@@ -140,6 +139,7 @@ def get_taxel_data(bb_number, S, taxel_predictions, taxel_predictions_info, pixe
             total_taxel_responses[n] = taxel_response
             total_taxels_position[n] = taxels_position
             total_taxel_normals[n] = taxel_normal
+
     
     #AVERAGE RESPONSES including taxels with 0 response
     for n in range(bb_number):
@@ -158,9 +158,9 @@ def get_taxel_data(bb_number, S, taxel_predictions, taxel_predictions_info, pixe
                 average_position[0] = average_position[0] + pixel_positions[n][i][0]
                 average_position[1] = average_position[1] + pixel_positions[n][i][1]
                 average_position[2] = average_position[2] + pixel_positions[n][i][2]
-            average_position[0] = average_position[0] /len(pixel_positions[n])
-            average_position[1] = average_position[1] /len(pixel_positions[n])
-            average_position[2] = average_position[2] /len(pixel_positions[n])
+            average_position[0] = average_position[0] / len(pixel_positions[n])
+            average_position[1] = average_position[1] / len(pixel_positions[n])
+            average_position[2] = average_position[2] / len(pixel_positions[n])
 
             bb_centroid[n] = average_position
             #print("Position of Centroid", taxel_predictions_info[n][0], "is", bb_centroid[n])
@@ -170,14 +170,14 @@ def get_taxel_data(bb_number, S, taxel_predictions, taxel_predictions_info, pixe
     #AVERAGE NORMAL
     for n in range(bb_number):
         average_normal = [0.0,0.0,0.0]
-        if len(pixel_positions[n]) != 0:
-            for i in range(len(pixel_positions[n])):
-                average_normal[0] = average_normal[0] - pixel_positions[n][i][0]
-                average_normal[1] = average_normal[1] - pixel_positions[n][i][1]
-                average_normal[2] = average_normal[2] - pixel_positions[n][i][2]
-            average_normal[0] = average_normal[0] /len(pixel_positions[n])
-            average_normal[1] = average_normal[1] /len(pixel_positions[n])
-            average_normal[2] = average_normal[2] /len(pixel_positions[n])
+        if len(total_taxel_normals[n]) != 0:
+            for i in range(len(total_taxel_normals[n])):
+                average_normal[0] = average_normal[0] - total_taxel_normals[n][i][0]
+                average_normal[1] = average_normal[1] - total_taxel_normals[n][i][1]
+                average_normal[2] = average_normal[2] - total_taxel_normals[n][i][2]
+            average_normal[0] = average_normal[0] / len(total_taxel_normals[n])
+            average_normal[1] = average_normal[1] / len(total_taxel_normals[n])
+            average_normal[2] = average_normal[2] / len(total_taxel_normals[n])
 
             bb_normal[n] = average_normal
             #print("Position of Centroid", taxel_predictions_info[n][0], "is", bb_centroid[n])
@@ -186,44 +186,16 @@ def get_taxel_data(bb_number, S, taxel_predictions, taxel_predictions_info, pixe
 
     return total_taxel_responses, average_responses, total_taxels_position, bb_centroid, bb_normal,  total_taxel_normals
 
-def total_responses_visualization(bb_number, V, pixel_positions, taxel_predictions_info, color_dict):
-    if bb_number !=0:
-        for n in range(bb_number):
-            counter = 0
-            contact_color = color_dict[taxel_predictions_info[n][0]]
-            for i in range(len(pixel_positions[n])):
-                a = random.randint(0,50)
-                if a == 4:
-                    V.add_marker(50*n+counter,pixel_positions[n][i], contact_color)
-                counter += 1
-
-
-
-def average_responses_visualization(bb_number, V, bb_centroid, taxel_predictions_info, color_dict ):
-    if bb_number !=0:
-        for n in range(bb_number):
-            contact_color = color_dict[taxel_predictions_info[n][0]]
-            V.add_marker((n*30+2*n),bb_centroid[n], contact_color)
-
-def total_faces_visualization(bb_number, V, face_centers, taxel_predictions_info, color_dict):
-    if bb_number !=0:
-        counter = 0
-        for n in range(bb_number):
-            contact_color = color_dict[taxel_predictions_info[n][0]]
-            for i in range(len(face_centers[n])):
-                V.add_marker(counter,face_centers[n][i], contact_color)
-                counter += 1
-
-def initialize_contact_marker_point(marker_position, color, id):
+def initialize_contact_marker_points(marker_position, color, id):
     marker = Marker()
     marker.id =  id
     marker.header.frame_id = "my_frame"
     marker.header.stamp    = rospy.get_rostime()
     marker.type = marker.POINTS
     marker.action = marker.ADD
-    marker.scale.x = 0.08
-    marker.scale.y = 0.08
-    marker.scale.z = 0.08
+    marker.scale.x = 0.04
+    marker.scale.y = 0.04
+    marker.scale.z = 0.04
     p = Point()
     triplePoints =[]
     quadColor = []
@@ -237,9 +209,9 @@ def initialize_contact_marker_point(marker_position, color, id):
     marker.pose.orientation.z = 0
     marker.pose.orientation.w = 1.0
     c = ColorRGBA()
-    c.r = color[0]
-    c.g = color[1]
-    c.b = color[2]
+    c.r = color[0]/255
+    c.g = color[1]/255
+    c.b = color[2]/255
     c.a = color[3]
     quadColor.append(c)
     marker.colors = quadColor
@@ -272,8 +244,7 @@ def initialize_contact_marker_spheres(marker_position, color, id):
 
     return marker
 
-
-def initialize_marker_responses(marker_position, bb_normal, color, id):
+def initialize_marker_responses(marker_position, bb_normal, average_responses, color, id):
     marker = Marker()
     marker.id =  id
     marker.header.frame_id = "my_frame"
@@ -281,16 +252,29 @@ def initialize_marker_responses(marker_position, bb_normal, color, id):
     marker.type = marker.ARROW
     marker.action = marker.ADD
     marker.action = 0
-    marker.scale.x = 0.08
-    marker.scale.y = 0.08
-    marker.scale.z = 0.08
+    marker.scale.x = 0.05
+    marker.scale.y = 0.09
+    marker.scale.z = 0.05
+    marker.pose.orientation.x = 0
     marker.pose.orientation.w = 1.0
     marker.color.r = color[0]
     marker.color.g = color[1]
     marker.color.b = color[2]
     marker.color.a = color[3]
-    marker.points = [ marker_position, bb_normal ]
-    marker.lifetime = rospy.Duration(0.2)
+    tail = Point()
+    tail.x = marker_position[0]*30
+    tail.y = marker_position[1]*30
+    tail.z = marker_position[2]*30
+    tail_list =[]
+    tail_list.append(tail)
+    tip = Point()
+    tip.x = marker_position[0]*30
+    tip.y = bb_normal[1]*average_responses/3000
+    tip.z = bb_normal[2]*average_responses/3000
+    tip_list =[]
+    tip_list.append(tip)
+    marker.points = [ tail, tip ]
+    marker.lifetime = rospy.Duration(0.5)
 
     return marker
 

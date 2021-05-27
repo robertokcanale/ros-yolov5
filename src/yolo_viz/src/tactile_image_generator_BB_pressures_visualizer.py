@@ -22,12 +22,13 @@ from utils.plots import plot_one_box
 from utils.torch_utils import select_device, load_classifier, time_synchronized
 from functions.functions import *
 
-#RUN BEFORE THIS SCRIPT IN A SEPARATE TERMINAL rosrun tf static_transform_publisher 1 1 0 0 0 0 1 map my_frame 10
+#RUN BEFORE THIS SCRIPT IN A SEPARATE TERMINAL rosrun tf static_transform_publisher 0 0 1 0 0 0 1 map my_frame 10
 
 #MAIN
 if __name__ == '__main__':
     rospy.init_node('markers_publisher', anonymous=True)
-    pub = rospy.Publisher('yolo_markers', MarkerArray, queue_size=10)
+    contact_pub = rospy.Publisher('yolo_contact', MarkerArray, queue_size=10)
+    arrow_pub = rospy.Publisher('yolo_contact_average', MarkerArray, queue_size=10)
     img_pub = rospy.Publisher('yolo_image', Image, queue_size=10)
     br = CvBridge()
     #LOAD TACTILE SKIN&TACTILE MAP
@@ -121,7 +122,7 @@ if __name__ == '__main__':
         #print("Taxel Positions:", total_taxels_position)
         #print("Average Taxel Responses:", average_responses) 
         #print("Average Taxel Positions:", bb_centroid)
-        #print("Average BB Taxels Normals:", bb_normal)
+        print("Average BB Taxels Normals:", bb_normal)
         
         #VISUALIZE MARKERS on OPENGL
         #total_responses_visualization(bb_number, V, total_taxels_position, taxel_predictions_info, color_dict )
@@ -134,23 +135,25 @@ if __name__ == '__main__':
             contact_color = color_dict[taxel_predictions_info[n][0]]
             counter = 0
             for i in range(len(pixel_positions[n])):
-                marker = initialize_contact_marker_spheres(pixel_positions[n][i], contact_color,(n*100 +counter))
+                marker = initialize_contact_marker_points(pixel_positions[n][i], contact_color,(n*100 +counter))
                 a = random.randint(0,10)
                 if a == 5:
                     bb_marker_array.markers.append(marker)
                 counter +=1
-
+        
         #VISUALIZE Total Normals on Rviz
         normal_array  = MarkerArray()
-        #counter = 0
-        #for n in range(bb_number):
-           # contact_color = color_dict[taxel_predictions_info[n][0]]
-            #marker = initialize_marker_responses(bb_centroid[n],bb_normal[n], contact_color,(n*100 +counter))
-            #bb_marker_array.markers.append(marker)
-           # counter +=1
+        counter = 0
+        for n in range(bb_number):
+            contact_color = color_dict[taxel_predictions_info[n][0]]
+            if bb_centroid[n] == []:
+                break
+            marker = initialize_marker_responses(bb_centroid[n], bb_normal[n], average_responses[n], contact_color, (n*100 +counter))
+            normal_array.markers.append(marker)
+            counter +=1
 
-
-        pub.publish(bb_marker_array)
+        contact_pub.publish(bb_marker_array)
+        arrow_pub.publish(normal_array)
         
         
         im_to_show = cv2.resize(I_resized, (500, 500), interpolation = cv2.INTER_AREA)
