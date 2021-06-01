@@ -3,24 +3,20 @@ import pyrobotskinlib as rsl
 import rospy
 import numpy as np
 import argparse
-import time
-import os
 import torch
-import cv2
-import random
-import time
+from cv2 import cvtColor, resize, imshow, waitKey, INTER_AREA, COLOR_GRAY2RGB
+from random import randint
 from cv_bridge import CvBridge
-import cv2
 from sensor_msgs.msg import Image
 from visualization_msgs.msg import MarkerArray
-from visualization_msgs.msg import Marker
+from functions import *
+from functions.functions_bb import *
+from functions.functions_forces import *
+from functions.functions_markers import *
+from functions.functions_taxel_data import *
 from models.experimental import attempt_load
-from utils.datasets import LoadStreams, LoadImages
-from utils.general import check_img_size, check_requirements, check_imshow, non_max_suppression, apply_classifier, \
-    scale_coords, xyxy2xywh, strip_optimizer, set_logging, increment_path
-from utils.plots import plot_one_box
-from utils.torch_utils import select_device, load_classifier, time_synchronized
-from functions.functions import *
+from utils.general import  non_max_suppression,  set_logging
+from utils.torch_utils import select_device
 
 #RUN BEFORE THIS SCRIPT IN A SEPARATE TERMINAL rosrun tf static_transform_publisher 0 0 1 0 0 0 1 map my_frame 10
 
@@ -72,14 +68,14 @@ if __name__ == '__main__':
     names = model.module.names if hasattr(model, 'module') else model.names
 
 
-    while True:
+    while 1:
         #GET NEW DATA
         u.make_this_thread_wait_for_new_data()
         #CREATE TACTILE IMAGE AND PROCESS IMAGE (for recorded data)
         I = np.array(TIB.get_tactile_image(),np.uint8) #get the image 
         I = I.reshape([rows,cols]) #reshape it into a 2d array
-        I_backtorgb = cv2.cvtColor(I,cv2.COLOR_GRAY2RGB)  #converting from grayscale to rgb 
-        I_resized = cv2.resize(I_backtorgb, (416,416), interpolation=cv2.INTER_AREA) #resize it for yolo
+        I_backtorgb = cvtColor(I,COLOR_GRAY2RGB)  #converting from grayscale to rgb 
+        I_resized = resize(I_backtorgb, (416,416), interpolation=INTER_AREA) #resize it for yolo
         I_transposed = np.transpose(I_resized, (2, 0, 1)) #transposing the image for processing
 
         #YOLO AND DATA PREPROCESSING
@@ -105,62 +101,49 @@ if __name__ == '__main__':
             #GENERATE MESSAGE
             print(f'Preditction:{s}.')
         
-        #GET BOUNDING BOXES FROM PIXELS
+               #GET BOUNDING BOXES FROM PIXELS
         bb_number = int(len(det)) # set the number of predictions 
+
         bb_predictions = bounding_box_predictions(det, bb_number, names)
-        
+
         #RESHAPE BOUNDING BOXES
         bb_predictions_reshaped, I_backtorgb = bounding_box_predictions_reshaped(bb_predictions, bb_number, I_backtorgb, colors, rows, cols)
-        
+
         #ACTIVATED TAXELS FOR EACH BB
         taxel_predictions, pixel_positions, taxel_predictions_info = bb_active_taxel(bb_number, T, bb_predictions_reshaped, TIB, skin_faces)
-        
-        #GET RESPONSE OF ACTIVATED TAXELS
-        total_taxel_responses, average_responses, total_taxels_position, bb_centroid, bb_normal,  total_taxel_normals = get_taxel_data(bb_number, S, T, taxel_predictions, taxel_predictions_info, number_of_ids)
 
-        #print("Taxel Predictions:", taxel_predictions) #here I have all the taxel indexes of my predictions, however i need to clean them 
-        #print("Taxel Predictions Info:", taxel_predictions_info) #here I have all the taxel indexes of my predictions, however i need to clean them 
-        #print("Taxel Responses:", total_taxel_responses) 
-        #print("Taxel Positions:", total_taxels_position)
-        #print("Average Taxel Responses:", average_responses) 
-        #print("Average Taxel Positions:", bb_centroid)
-        print("Average BB Taxels Normals:", bb_normal)
-        
-        #VISUALIZE MARKERS on OPENGL
-        #total_responses_visualization(bb_number, V, total_taxels_position, taxel_predictions_info, color_dict )
-        #total_faces_visualization(bb_number, V, face_centers, taxel_predictions_info, color_dict)
-        #average_responses_visualization(bb_number, V, bb_centroid, taxel_predictions_info, color_dict )
+        #GET RESPONSE OF ACTIVATED TAXELS
+        total_taxel_responses, total_taxels_3D_position, total_taxel_normals, total_taxels_2D_position = get_total_data(bb_number, S, T, taxel_predictions)
+
+        average_responses = get_average_response_per_BB(bb_number, total_taxel_responses, taxel_predictions_info)
+        #bb_normal = get_bb_average_normals(bb_number,total_taxel_normals )
+
+        bb_centroid2d, bb_centroid3d = get_bb_centroids(bb_number,S,T, total_taxels_2D_position, number_of_ids)
+
+        #bb_taxels_r = get_distance_from_center(bb_number, total_taxels_3D_position)
+        #bb_taxels_r_axis = get_distance_from_axis(bb_number, total_taxels_3D_position)
+        total_bb_forces = find_total_bb_forces(bb_number, total_taxel_responses, total_taxel_normals)
+
+        bb_integral_force = get_bb_integral_force(bb_number, total_bb_forces)
+
+        #bb_integral_moment, total_bb_moment = get_bb_moment(bb_number, total_bb_forces, bb_centroid3d, total_taxels_3D_position)
 
         #VISUALIZE MARKERS on RviZ
-        bb_marker_array  = MarkerArray()
-        for n in range(bb_number):
-            contact_color = color_dict[taxel_predictions_info[n][0]]
-            counter = 0
-            for i in range(len(pixel_positions[n])):
-                marker = initialize_contact_marker_points(pixel_positions[n][i], contact_color,(n*100 +counter))
-                a = random.randint(0,10)
-                if a == 5:
-                    bb_marker_array.markers.append(marker)
-                counter +=1
+        bb_contacts = initialize_contacts(bb_number, pixel_positions, taxel_predictions_info, color_dict)
         
-        #VISUALIZE Total Normals on Rviz
-        normal_array  = MarkerArray()
-        counter = 0
-        for n in range(bb_number):
-            contact_color = color_dict[taxel_predictions_info[n][0]]
-            if bb_centroid[n] == []:
-                break
-            marker = initialize_marker_responses(bb_centroid[n], bb_normal[n], average_responses[n], contact_color, (n*100 +counter))
-            normal_array.markers.append(marker)
-            counter +=1
+        #VISUALIZE Total BB Normals on Rviz
+        #normal_array = initialize_avg_response_normals(bb_number, bb_normal, average_responses, taxel_predictions_info, bb_centroid3d, color_dict)
 
-        contact_pub.publish(bb_marker_array)
-        arrow_pub.publish(normal_array)
+        #VISUALIZE Total taxel Normals on Rviz
+        #taxel_normals = initialize_taxel_normals(bb_number, total_taxel_normals, total_taxels_3D_position, taxel_predictions_info, color_dict)
+        taxel_forces = initialize_taxel_forces(bb_number, total_taxels_3D_position,total_bb_forces, taxel_predictions_info, color_dict)
+
+        contact_pub.publish(bb_contacts)
+        arrow_pub.publish(taxel_forces)
         
         
-        im_to_show = cv2.resize(I_resized, (500, 500), interpolation = cv2.INTER_AREA)
-        #cv2.imshow('Tactile Image',im_to_show)
-        #cv2.waitKey(1)
+        im_to_show = resize(I_resized, (500, 500), interpolation =INTER_AREA)
+
         img_pub.publish(br.cv2_to_imgmsg(im_to_show))
         #cv2.imshow('Tactile Image  Original',I_backtorgb)
         #cv2.waitKey(1)
