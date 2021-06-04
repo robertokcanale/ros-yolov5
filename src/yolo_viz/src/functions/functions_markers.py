@@ -120,8 +120,6 @@ def initialize_taxel_forces(bb_number, total_taxels_3D_position,total_bb_forces,
                 counter +=1
     return taxel_forces_array
     
-
-
 #VISUALIZE Total Normals on Rviz
 def initialize_avg_response_normals(bb_number, bb_normal, average_responses, taxel_predictions_info, bb_centroid3d, color_dict):
     normal_array  = MarkerArray()
@@ -141,8 +139,8 @@ def initialize_contacts(bb_number, pixel_positions, taxel_predictions_info, colo
         contact_color = color_dict[taxel_predictions_info[n][0]]
         counter = 0
         for i in range(len(pixel_positions[n])):
-            marker = initialize_contact_marker_points(pixel_positions[n][i], contact_color,(n*100 +counter))
-            a = randint(0,10)
+            marker = initialize_contact_marker_spheres(pixel_positions[n][i], contact_color,(n*100 +counter))
+            a = randint(0,30)
             if a == 5:
                 bb_contacts.markers.append(marker)
             counter +=1

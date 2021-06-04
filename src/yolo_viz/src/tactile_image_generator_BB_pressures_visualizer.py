@@ -43,6 +43,10 @@ if __name__ == '__main__':
     number_of_faces = len(skin_faces)
     taxel_ids = S.get_taxel_ids()
     number_of_ids = len(taxel_ids)
+    taxel_coords = np.zeros((number_of_ids,3))
+    for i in range(number_of_ids):
+        taxel_coords[i] = T.taxels[i].get_taxel_position() 
+
 
     #INITIALIZE YOLOV5
     parser = argparse.ArgumentParser()
@@ -116,9 +120,9 @@ if __name__ == '__main__':
         total_taxel_responses, total_taxels_3D_position, total_taxel_normals, total_taxels_2D_position = get_total_data(bb_number, S, T, taxel_predictions)
 
         average_responses = get_average_response_per_BB(bb_number, total_taxel_responses, taxel_predictions_info)
-        #bb_normal = get_bb_average_normals(bb_number,total_taxel_normals )
+        bb_normal = get_bb_average_normals(bb_number,total_taxel_normals )
 
-        bb_centroid2d, bb_centroid3d = get_bb_centroids(bb_number,S,T, total_taxels_2D_position, number_of_ids)
+        bb_centroid2d, bb_centroid3d = get_bb_centroids(bb_number,S,T, total_taxels_2D_position, taxel_coords)
 
         #bb_taxels_r = get_distance_from_center(bb_number, total_taxels_3D_position)
         #bb_taxels_r_axis = get_distance_from_axis(bb_number, total_taxels_3D_position)
@@ -132,14 +136,15 @@ if __name__ == '__main__':
         bb_contacts = initialize_contacts(bb_number, pixel_positions, taxel_predictions_info, color_dict)
         
         #VISUALIZE Total BB Normals on Rviz
-        #normal_array = initialize_avg_response_normals(bb_number, bb_normal, average_responses, taxel_predictions_info, bb_centroid3d, color_dict)
+        normal_array = initialize_avg_response_normals(bb_number, bb_normal, average_responses, taxel_predictions_info, bb_centroid3d, color_dict)
 
         #VISUALIZE Total taxel Normals on Rviz
         #taxel_normals = initialize_taxel_normals(bb_number, total_taxel_normals, total_taxels_3D_position, taxel_predictions_info, color_dict)
-        taxel_forces = initialize_taxel_forces(bb_number, total_taxels_3D_position,total_bb_forces, taxel_predictions_info, color_dict)
+        #taxel_forces = initialize_taxel_forces(bb_number, total_taxels_3D_position,total_bb_forces, taxel_predictions_info, color_dict)
 
         contact_pub.publish(bb_contacts)
-        arrow_pub.publish(taxel_forces)
+        arrow_pub.publish(normal_array)
+
         
         
         im_to_show = resize(I_resized, (500, 500), interpolation =INTER_AREA)
