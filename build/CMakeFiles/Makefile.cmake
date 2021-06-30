@@ -55,6 +55,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/home/maclab/Documents/RCanale/ros-yolov5/src/yolo_viz/package.xml"
   "/home/maclab/Documents/RCanale/ros-yolov5/src/yolo_viz/setup.py"
   "/home/maclab/Documents/RCanale/ros-yolov5/src/yolo_viz/src/tactile_image_generator_BB_pressures_visualizer.py"
+  "/home/maclab/Documents/RCanale/ros-yolov5/src/yolo_viz/src/tactile_image_generator_total_pressures_visualizer.py"
   "/opt/ros/noetic/share/catkin/cmake/all.cmake"
   "/opt/ros/noetic/share/catkin/cmake/assert.cmake"
   "/opt/ros/noetic/share/catkin/cmake/atomic_configure_file.cmake"

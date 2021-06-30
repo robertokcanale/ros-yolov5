@@ -211,7 +211,7 @@ foreach(depend ${depends})
   _unpack_libraries_with_build_configuration(timed_yolov5_LIBRARIES ${timed_yolov5_LIBRARIES})
 
   _list_append_unique(timed_yolov5_LIBRARY_DIRS ${${timed_yolov5_dep}_LIBRARY_DIRS})
-  list(APPEND timed_yolov5_EXPORTED_TARGETS ${${timed_yolov5_dep}_EXPORTED_TARGETS})
+  _list_append_deduplicate(timed_yolov5_EXPORTED_TARGETS ${${timed_yolov5_dep}_EXPORTED_TARGETS})
 endforeach()
 
 set(pkg_cfg_extras "")

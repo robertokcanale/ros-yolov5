@@ -211,7 +211,7 @@ foreach(depend ${depends})
   _unpack_libraries_with_build_configuration(handsnet_tftrt_yolo_LIBRARIES ${handsnet_tftrt_yolo_LIBRARIES})
 
   _list_append_unique(handsnet_tftrt_yolo_LIBRARY_DIRS ${${handsnet_tftrt_yolo_dep}_LIBRARY_DIRS})
-  list(APPEND handsnet_tftrt_yolo_EXPORTED_TARGETS ${${handsnet_tftrt_yolo_dep}_EXPORTED_TARGETS})
+  _list_append_deduplicate(handsnet_tftrt_yolo_EXPORTED_TARGETS ${${handsnet_tftrt_yolo_dep}_EXPORTED_TARGETS})
 endforeach()
 
 set(pkg_cfg_extras "handsnet_tftrt_yolo-msg-extras.cmake")

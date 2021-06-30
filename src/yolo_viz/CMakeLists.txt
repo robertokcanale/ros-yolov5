@@ -206,7 +206,7 @@ include_directories(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
-catkin_install_python(PROGRAMS   src/tactile_image_generator_BB_pressures_visualizer.py
+catkin_install_python(PROGRAMS   src/tactile_image_generator_BB_pressures_visualizer.py src/tactile_image_generator_total_pressures_visualizer.py
 
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )

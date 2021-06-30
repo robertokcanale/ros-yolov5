@@ -5,7 +5,6 @@ import numpy as np
 import argparse
 import torch
 from cv2 import cvtColor, resize, imshow, waitKey, INTER_AREA, COLOR_GRAY2RGB
-from random import randint
 from cv_bridge import CvBridge
 from sensor_msgs.msg import Image
 from visualization_msgs.msg import MarkerArray
@@ -43,9 +42,7 @@ if __name__ == '__main__':
     number_of_faces = len(skin_faces)
     taxel_ids = S.get_taxel_ids()
     number_of_ids = len(taxel_ids)
-    taxel_coords = np.zeros((number_of_ids,3))
-    for i in range(number_of_ids):
-        taxel_coords[i] = T.taxels[i].get_taxel_position() 
+    #taxel_coords= [T.taxels[i].get_taxel_position() for i in range(number_of_ids)]
 
 
     #INITIALIZE YOLOV5
@@ -54,7 +51,7 @@ if __name__ == '__main__':
     parser.add_argument('--agnostic-nms', action='store_true', help='class-agnostic NMS')
     parser.add_argument('--augment', action='store_true', help='augmented inference')
     opt = parser.parse_args()
-    weights = 'src/yolo_viz/src//data/best_l_6classes_finetune.pt' 
+    weights = 'src/yolo_viz/src/data/best_s_6classes_finetune.pt' 
     imgsz = 416
     conf_thres = 0.5
     iou_thres = 0.5
@@ -120,15 +117,15 @@ if __name__ == '__main__':
         total_taxel_responses, total_taxels_3D_position, total_taxel_normals, total_taxels_2D_position = get_total_data(bb_number, S, T, taxel_predictions)
 
         average_responses = get_average_response_per_BB(bb_number, total_taxel_responses, taxel_predictions_info)
-        bb_normal = get_bb_average_normals(bb_number,total_taxel_normals )
+        #bb_normal = get_bb_average_normals(bb_number,total_taxel_normals )
 
-        bb_centroid2d, bb_centroid3d = get_bb_centroids(bb_number,S,T, total_taxels_2D_position, taxel_coords)
+        #bb_centroid2d, bb_centroid3d = get_bb_centroids(bb_number,S,T, total_taxels_2D_position, taxel_coords)
 
         #bb_taxels_r = get_distance_from_center(bb_number, total_taxels_3D_position)
         #bb_taxels_r_axis = get_distance_from_axis(bb_number, total_taxels_3D_position)
-        total_bb_forces = find_total_bb_forces(bb_number, total_taxel_responses, total_taxel_normals)
+        #total_bb_forces = find_total_bb_forces(bb_number, total_taxel_responses, total_taxel_normals)
 
-        bb_integral_force = get_bb_integral_force(bb_number, total_bb_forces)
+        #bb_integral_force = get_bb_integral_force(bb_number, total_bb_forces)
 
         #bb_integral_moment, total_bb_moment = get_bb_moment(bb_number, total_bb_forces, bb_centroid3d, total_taxels_3D_position)
 
@@ -136,14 +133,14 @@ if __name__ == '__main__':
         bb_contacts = initialize_contacts(bb_number, pixel_positions, taxel_predictions_info, color_dict)
         
         #VISUALIZE Total BB Normals on Rviz
-        normal_array = initialize_avg_response_normals(bb_number, bb_normal, average_responses, taxel_predictions_info, bb_centroid3d, color_dict)
+        #normal_array = initialize_avg_response_normals(bb_number, bb_normal, average_responses, taxel_predictions_info, bb_centroid3d, color_dict)
 
         #VISUALIZE Total taxel Normals on Rviz
         #taxel_normals = initialize_taxel_normals(bb_number, total_taxel_normals, total_taxels_3D_position, taxel_predictions_info, color_dict)
-        #taxel_forces = initialize_taxel_forces(bb_number, total_taxels_3D_position,total_bb_forces, taxel_predictions_info, color_dict)
+        #taxel_forces = initialize_taxel_forces(bb_number, total_taxels_3D_position, total_bb_forces, taxel_predictions_info, color_dict)
 
         contact_pub.publish(bb_contacts)
-        arrow_pub.publish(normal_array)
+        #arrow_pub.publish(normal_array)
 
         
         

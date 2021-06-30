@@ -211,7 +211,7 @@ foreach(depend ${depends})
   _unpack_libraries_with_build_configuration(yolo_viz_LIBRARIES ${yolo_viz_LIBRARIES})
 
   _list_append_unique(yolo_viz_LIBRARY_DIRS ${${yolo_viz_dep}_LIBRARY_DIRS})
-  list(APPEND yolo_viz_EXPORTED_TARGETS ${${yolo_viz_dep}_EXPORTED_TARGETS})
+  _list_append_deduplicate(yolo_viz_EXPORTED_TARGETS ${${yolo_viz_dep}_EXPORTED_TARGETS})
 endforeach()
 
 set(pkg_cfg_extras "")

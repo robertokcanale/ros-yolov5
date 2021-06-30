@@ -34,7 +34,7 @@ def initialize_contact_marker_points(marker_position, color, id):
     c.a = color[3]
     quadColor.append(c)
     marker.colors = quadColor
-    marker.lifetime = rospy.Duration(1)
+    marker.lifetime = rospy.Duration(0.1)
 
     return marker
 
@@ -45,9 +45,9 @@ def initialize_contact_marker_spheres(marker_position, color, id):
     marker.header.stamp    = rospy.get_rostime()
     marker.type = marker.SPHERE
     marker.action = marker.ADD
-    marker.scale.x = 0.02
-    marker.scale.y = 0.02
-    marker.scale.z = 0.02
+    marker.scale.x = 0.06
+    marker.scale.y = 0.06
+    marker.scale.z = 0.06
     marker.pose.position.x = marker_position[0]*40
     marker.pose.position.y = marker_position[1]*40
     marker.pose.position.z = marker_position[2]*40
@@ -59,7 +59,7 @@ def initialize_contact_marker_spheres(marker_position, color, id):
     marker.color.g = color[1]
     marker.color.b = color[2]
     marker.color.a = color[3]
-    marker.lifetime = rospy.Duration(0.2)
+    marker.lifetime = rospy.Duration(0.3)
 
     return marker
 
@@ -93,7 +93,7 @@ def initialize_marker_responses(marker_position, axis, response, color, id):
     tip_list =[]
     tip_list.append(tip)
     marker.points = [ tail, tip ]
-    marker.lifetime = rospy.Duration(1)
+    marker.lifetime = rospy.Duration(0.3)
 
     return marker
 
@@ -140,7 +140,7 @@ def initialize_contacts(bb_number, pixel_positions, taxel_predictions_info, colo
         counter = 0
         for i in range(len(pixel_positions[n])):
             marker = initialize_contact_marker_spheres(pixel_positions[n][i], contact_color,(n*100 +counter))
-            a = randint(0,30)
+            a = randint(0,10)
             if a == 5:
                 bb_contacts.markers.append(marker)
             counter +=1

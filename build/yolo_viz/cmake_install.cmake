@@ -60,3 +60,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/yolo_viz" TYPE PROGRAM FILES "/home/maclab/Documents/RCanale/ros-yolov5/build/yolo_viz/catkin_generated/installspace/tactile_image_generator_BB_pressures_visualizer.py")
 endif()
 
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/yolo_viz" TYPE PROGRAM FILES "/home/maclab/Documents/RCanale/ros-yolov5/build/yolo_viz/catkin_generated/installspace/tactile_image_generator_total_pressures_visualizer.py")
+endif()
+
